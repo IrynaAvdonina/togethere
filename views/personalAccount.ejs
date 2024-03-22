@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/personAccount.css" />
+  <link rel="icon" href="public/img/icon.ico" type="image/ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+  <script src="/src/js/main.js" defer></script>
+  <title>ToGetThere</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav>
+      <div class="ham">
+        <span class="bar1"></span>
+        <span class="bar2"></span>
+        <span class="bar3"></span>
+      </div>
+      <ul class="nav-sub">
+        <li class="list-item"> <a href="/" class="wrapper-nav ">Головна</a></li>
+        <li class="list-item"><a href="/events" class="wrapper-nav">Заходи</a></li>
+        <%if(typeof currentUser!="undefined" ){ %>
+          <li class="list-item">
+            <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav active">
+              Особистий кабінет
+            </a>
+          </li>
+          <%}%>
+      </ul>
+    </nav>
+
+    <div class="header-wrapper">
+      <h1 class="header-h1">ОСОБИСТИЙ КАБІНЕТ</h1>
+    </div>
+  </div>
+  <div class="personal-info">
+    <form action="/edit-profile" class="form_personal-info" method="post">
+      <div class="form-left">
+
+        <div class="form-name div">
+          <label for="" class="form-name_label">Ім'я</label>
+          <input name="name" list="names" placeholder="Введіть ім'я" value="<%=user.name %>" required />
+        </div>
+        <div class="form-surname div">
+          <label for="" class="form-surname_label">Прізвище</label>
+          <input name="surname" list="surnames" placeholder="Введіть прізвище" value="<%=user.surname %>" required />
+        </div>
+
+        <div class="form-dateBirth div">
+          <label for="" class="form-dateBirth_label">Дата народження</label>
+          <input type="date" name="date" id="" placeholder="Введіть дату народження" value="<%=user['date_bitrh'] %>">
+        </div>
+        <div class="form-addInfo div">
+          <label for="" class="form-addInfo_label">Додаткова інформація</label>
+          <textarea name="addInfo" id="addInfo" rows="5"
+            placeholder="Введіть дод. інформацію. Наприклад: займаюсь футболом"><%=user.addInfo %></textarea>
+        </div>
+      </div>
+
+      <div class="form-right">
+        <div class="form-email div">
+          <label for="" class="form-email_label">Email</label>
+          <input type="email" name="email" placeholder="Введіть пошту" value="<%=user.email %>" required>
+        </div>
+
+        <div class="form-phone div">
+          <label for="" class="form-phone_label">Телефон</label>
+          <input type="tel" name="phone" placeholder="+380666666666" value="<%=user.phone %>" required minlength="10" />
+
+        </div>
+        <div class="form-password div">
+          <label for="" class="form-password_label">Пароль</label>
+          <input type="password" name="password" minlength="5" />
+
+        </div>
+
+        <div class="buttons-persAcc">
+          <button class="btn_change" type="submit">Змінити</button>
+          <a href="/logout" class="btn_exit">Вийти</a>
+        </div>
+      </div>
+    </form>
+  </div>
+  <% if(persEvent.length> 0) { %>
+    <hr class="line">
+    <div class="personal-events">
+      <h2 class="personal-events-h">
+        Особисті заходи
+      </h2>
+      <div class="personal-event">
+        <% persEvent.forEach(ev=> { %>
+          <div class="card">
+            <div class="top-card-event">
+              <div class="city-event">
+                <img src="/public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
+                <p class="city-event-name">
+                  <%=ev.city%>
+                </p>
+              </div>
+            </div>
+            <h3 class="type-event-name">
+              <%=ev.name%>
+            </h3>
+            <p class="place-event-name">
+              <%=ev.place%>
+            </p>
+            <div class="date-time">
+              <div class="date-event">
+                <img src="/public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
+                <p class="date-event-name">
+                  <%=ev.date.split("-").reverse().join('.')%>
+                </p>
+              </div>
+              <div class="time-event">
+                <img src="/public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
+                <p class="time-event-name">
+                  <%=ev.time%>
+                </p>
+              </div>
+            </div>
+            <div class="button-event">
+              <a href="/event-card/<%=ev['_id']%>" class="button-more">Детальніше</a>
+              <form action="/delete-event/<%=ev['_id']%>" method="post">
+                <button type="submit" class="button-del">Видалити</button>
+              </form>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+    <% } %>
+</body>
+
+</html>

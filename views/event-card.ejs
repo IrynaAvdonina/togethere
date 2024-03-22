@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="UA">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/event-card.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="public/img/icon.ico" type="image/ico">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin="" defer></script>
+
+  <script src="../src/js/main.js" defer></script>
+  <script src="../src/js/utils/showMap.js" defer></script>
+  <title>ToGetThere</title>
+</head>
+
+<body>
+  <div class="wrapper-event">
+    <div class="nav">
+      <nav>
+        <div class="ham">
+          <span class="bar1"></span>
+          <span class="bar2"></span>
+          <span class="bar3"></span>
+        </div>
+        <ul class="nav-sub">
+          <li class="list-item"> <a href="/" class="wrapper-nav ">Головна</a></li>
+          <li class="list-item"><a href="/events" class="wrapper-nav">Заходи</a></li>
+          <%if(typeof currentUser!=="undefined" ){ %>
+            <li class="list-item">
+              <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav">
+                Особистий кабінет
+              </a>
+            </li>
+            <%}else{%>
+              <li class="list-item">
+                <a href="/auth" class="wrapper-nav">
+                  Вхід
+                </a>
+              </li>
+              <%}%>
+        </ul>
+      </nav>
+    </div>
+    <div class="content">
+      <div class="event-info">
+        <div class="event-header">
+          <div class="event-owner">
+            <a class="event-owner-a"><img src="../public/img/user2.svg" alt="user" class="event-owner_img" width="18px">
+              <p class="event-owner_name">
+                <%=ownerEv.name + " " +ownerEv.surname %>
+              </p>
+            </a>
+            <div class=" user-info">
+              <%if( !isNaN(age) && age> 3 && age < 150 ){%>
+                  <p class="user-age">
+                    <%="Вік: "+age+" р." %>
+                  </p>
+                  <%}%>
+                    <%if(ownerEv.addInfo!=""){%>
+                      <p class=" user-addInfo-p">
+
+                        <%=`"`+ownerEv.addInfo+`"` %>
+
+                      </p>
+                      <%}%>
+                        <div class="user-links">
+                          <div class="user-link-phone">
+                            <% if (ownerEv.ShowPhone!=null) { %>
+                              <img src="../public/img/phone.svg" alt="" width="20px" height="20px">
+                              <a class="user-phone" href="tel:<%=ownerEv.phone %>" class="number">
+                                <%=ownerEv.phone %>
+                              </a>
+                              <% } %>
+
+                          </div>
+                          <!--<div class="user-link-insta">
+                      <img src="../public/img/instagram.svg" alt="" width="20px" height="20px">
+                      <a href="" class="user-insta"></a>
+                    </div>
+                    <div class="user-link-tg">
+                      <img src="../public/img/telegram.svg" alt="" width="20px" height="20px">
+                      <a href="https://t.me/" class="user-tg"></a>
+                    </div>-->
+
+                        </div>
+            </div>
+
+          </div>
+          <div class="event-name">
+            <h1 class="event-name-h1">
+              <%=massEvent.name %>
+            </h1>
+            <hr class="line">
+
+          </div>
+        </div>
+        <div class="event-about">
+          <ul class="event-about-list">
+            <li class="event-date">
+              <%=massEvent.date.split("-").reverse().join('.'); %>
+
+            </li>
+            <li class="event-time">
+              <%=massEvent.time %>
+            </li>
+            <li class="event-place">
+              <%=massEvent.city +", "+ massEvent.place%>
+            </li>
+            <li class=" event-number_memb">
+                <%=massEvent.participants.length + "/" + massEvent.maxParticipants +" учасників"%>
+            </li>
+            <li class="event-level">
+              <%="Рівень: "+levelSp %>
+            </li>
+            <%if(massEvent.addInfo){%>
+              <li class=" event-addInfo">
+                <%=massEvent.addInfo %>
+            </li>
+            <%}%>
+          </ul>
+        </div>
+        <%if(typeof currentUser!=="undefined" ){ %>
+          <%if(ownerEv['_id'].toString() !=currentUser['_id'].toString()){%>
+            <div class=" button-join">
+              <form action="/join-event/<%=massEvent['_id'] %>" method="post">
+                <button type="submit" class="event-join">
+                  Приєднатися
+                </button>
+              </form>
+            </div>
+            <%}%>
+              <%}else{%>
+                <div class=" button-join">
+                  <form action="/join-event/<%=massEvent['_id'] %>" method="post">
+                    <button type="submit" class="event-join">
+                      Приєднатися
+                    </button>
+                  </form>
+                </div>
+                <%}%>
+      </div>
+      <%if(massEvent.latLng[0]!="" &&massEvent.latLng[1]!="" ){ %>
+        <div id="map" data-lat="<%=massEvent.latLng[0]%>" data-long="<%=massEvent.latLng[1]%>">
+        </div>
+        <%}%>
+    </div>
+  </div>
+
+</body>
+
+</html>

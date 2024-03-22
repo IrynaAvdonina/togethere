@@ -1,0 +1,24 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore .env files
+.env
+
+# Ignore logs directory
+logs/
+
+# Ignore temporary files or directories
+tmp/
+temp/
+
+# Ignore coverage reports
+coverage/
+
+# Ignore log files
+*.log
+
+.swm/
+
+# Ignore IDE or editor-specific directories
+.idea/
+.vscode/
