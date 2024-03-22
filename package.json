@@ -26,6 +26,6 @@
     "express-session": "^1.17.3",
     "minimatch": "^9.0.3",
     "mongoose": "^6.3.8",
-    "serve": "^13.0.2"
+    "serve": "^14.2.1"
   }
 }
