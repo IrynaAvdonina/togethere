@@ -1,25 +1,31 @@
-
 import express from 'express';
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import session from 'express-session';
-
 import bodyParser from 'body-parser';
 import ejs from 'ejs';
 
 import calculateAge from './src/js/utils/calculateAge.js';
 import setCurrentUser from './src/js/utils/setCurrentUser.js';
 import showOptions from './src/js/api/showOptions.js';
+import dotenv from 'dotenv';
 
+function setFlashMessage(req, message) {
+  req.session.flashMessage = message;
+}
+
+dotenv.config();
+
+const mongodbUri = process.env.MONGODB_URI;
 const app = express();
-
 const port = process.env.PORT || 3000;
-const client = new MongoClient('mongodb+srv://irina:s4y6T8me69qePX.@together.xb0v3pl.mongodb.net/togethere?retryWrites=true&w=majority',
+const client = new MongoClient(mongodbUri,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+
 
 try {
   client.connect();
@@ -52,12 +58,16 @@ app.use(setCurrentUser(client));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.get("/", setCurrentUser(client), async function (request, response) {
+
+app.get("/", setCurrentUser(client), async function (req, res) {
   try {
     const events = client.db().collection('events');
+    const flashMessage = req.session.flashMessage;
+    delete req.session.flashMessage;
 
     events.find({}).limit(4).toArray().then(function (massEvent) {
-      response.render("index", {
+      res.render("index", {
+        flashMessage,
         massEvent
       });
     });
@@ -66,7 +76,7 @@ app.get("/", setCurrentUser(client), async function (request, response) {
   }
 });
 
-app.get("/events", setCurrentUser(client), async function (request, response) {
+app.get("/events", setCurrentUser(client), async function (req, res) {
   try {
     const events = client.db().collection('events');
 
@@ -77,7 +87,7 @@ app.get("/events", setCurrentUser(client), async function (request, response) {
     const selectType = ejs.render(showOptions(sportTypes));
 
     events.find({}).toArray().then(function (massEvent) {
-      response.render("events", {
+      res.render("events", {
         selectType, selectLevel, massEvent,
       });
     });
@@ -86,7 +96,7 @@ app.get("/events", setCurrentUser(client), async function (request, response) {
   }
 });
 
-app.post("/filter", setCurrentUser(client), async function (request, response) {
+app.post("/filter", setCurrentUser(client), async function (req, res) {
   try {
 
     const events = client.db().collection('events');
@@ -97,22 +107,22 @@ app.post("/filter", setCurrentUser(client), async function (request, response) {
 
     const selectLevel = ejs.render(showOptions(levels));
     let condition = {};
-    if (request.body.type != undefined) {
-      condition["type"] = request.body.type;
+    if (req.body.type != undefined) {
+      condition["type"] = req.body.type;
     }
-    if (request.body.date != '') {
-      condition["date"] = request.body.date;
+    if (req.body.date != '') {
+      condition["date"] = req.body.date;
     }
-    if (request.body.level != undefined) {
-      condition["level"] = +request.body.level;
+    if (req.body.level != undefined) {
+      condition["level"] = +req.body.level;
     }
-    if (request.body.city != '') {
+    if (req.body.city != '') {
 
-      condition["city"] = request.body.city;
+      condition["city"] = req.body.city;
     }
 
     events.find(condition).toArray().then(function (massEvent) {
-      response.render("events", {
+      res.render("events", {
         selectType, selectLevel, massEvent
       });
     });
@@ -121,9 +131,12 @@ app.post("/filter", setCurrentUser(client), async function (request, response) {
   }
 });
 
-app.get("/event-card/:id", setCurrentUser(client), async function (request, response) {
+app.get("/event-card/:id", setCurrentUser(client), async function (req, res) {
   try {
-    let id = request.params.id;
+    const flashMessage = req.session.flashMessage;
+    delete req.session.flashMessage;
+
+    let id = req.params.id;
     const events = client.db().collection('events');
     const users = client.db().collection('users');
     const levels = client.db().collection('sportLevel');
@@ -136,13 +149,13 @@ app.get("/event-card/:id", setCurrentUser(client), async function (request, resp
 
       const level = await levels.findOne({ id: +massEvent.level });
       let levelSp;
-      console.log(massEvent.level);
+      //console.log(massEvent.level);
       if (level) {
         levelSp = level.text;
       }
 
-      response.render("event-card", {
-        massEvent, ownerEv, age, levelSp
+      res.render("event-card", {
+        flashMessage, massEvent, ownerEv, age, levelSp
       });
     } else {
       console.log("Подія не знайдена");
@@ -153,38 +166,49 @@ app.get("/event-card/:id", setCurrentUser(client), async function (request, resp
 });
 
 
-app.get("/createEvent", setCurrentUser(client), async function (request, response) {
-  const levels = await client.db().collection('sportLevel').find({}).toArray();
-  const sportTypes = await client.db().collection('sportType').find({}).toArray();
+app.get("/createEvent", setCurrentUser(client), async function (req, res) {
+  if (!req.session.loggedIn) {
 
-  const selectType = ejs.render(showOptions(sportTypes));
-  const selectLevel = ejs.render(showOptions(levels));
-
-  response.render("createEvent", { selectType, selectLevel });
-});
-
-app.post("/post-event", setCurrentUser(client), async function (request, response) {
-  console.log(request.body.type);
-  const events = client.db().collection('events');
-  if (request.session.loggedIn) {
-    events.insertOne({
-      name: request.body.name,
-      type: request.body.type,
-      maxParticipants: request.body.maxPart,
-      city: request.body.city.toUpperCase(),
-      place: request.body.place,
-      date: request.body.date,
-      time: request.body.time,
-      level: request.body.level,
-      addInfo: request.body.addInfo,
-      idOwner: mongoose.Types.ObjectId(request.session.userId),
-      participants: [],
-      latLng: request.body.map.split(',')
-    });
-    response.redirect("/createEvent");
+    setFlashMessage(req, "Ви не увійшли в систему!");
+    res.redirect("/auth");
+    return
   }
   else {
-    response.redirect("/auth");
+    const levels = await client.db().collection('sportLevel').find({}).toArray();
+    const sportTypes = await client.db().collection('sportType').find({}).toArray();
+
+    const selectType = ejs.render(showOptions(sportTypes));
+    const selectLevel = ejs.render(showOptions(levels));
+
+    res.render("createEvent", { selectType, selectLevel });
+  }
+});
+
+app.post("/post-event", setCurrentUser(client), async function (req, res) {
+
+  const events = client.db().collection('events');
+  if (req.session.loggedIn) {
+    const result = await events.insertOne({
+      name: req.body.name,
+      type: req.body.type,
+      maxParticipants: req.body.maxPart,
+      city: req.body.city.toUpperCase(),
+      place: req.body.place,
+      date: req.body.date,
+      time: req.body.time,
+      level: req.body.level,
+      addInfo: req.body.addInfo,
+      idOwner: mongoose.Types.ObjectId(req.session.userId),
+      participants: [],
+      latLng: req.body.map.split(',')
+    });
+    const eventId = result.insertedId.toString();
+    setFlashMessage(req, "Ви успішно створили подію!");
+    res.redirect("/event-card/" + eventId);
+  }
+  else {
+    setFlashMessage(req, "Ви не увійшли в систему!");
+    res.redirect("/auth");
   }
 });
 
@@ -193,52 +217,78 @@ app.post("/join-event/:id", setCurrentUser(client), async function (req, res) {
   const events = client.db().collection('events');
 
   if (req.session.loggedIn) {
-    console.log("join to event")
-    events.updateOne({ _id: mongoose.Types.ObjectId(id) },
-      { $addToSet: { participants: mongoose.Types.ObjectId(req.session.userId) } })
-    res.redirect("/event-card/" + id);
+
+    try {
+      const eventId = mongoose.Types.ObjectId(id);
+      const event = await events.findOne({ _id: eventId });
+      const participantStrings = event.participants.map(p => p.toString());
+
+      if (participantStrings.includes(req.session.userId)) {
+        setFlashMessage(req, "Ви вже приєднані до цієї події!");
+        res.redirect("back");
+        return;
+      }
+
+      await events.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $addToSet: { participants: mongoose.Types.ObjectId(req.session.userId) } });
+      setFlashMessage(req, "Успішне приєднання!");
+      res.redirect("back");
+
+    } catch (error) {
+      console.log(error)
+      setFlashMessage(req, "Приєднатися не вдалося!");
+      res.redirect("back");
+    }
   }
   else {
+    setFlashMessage(req, "Ви не увійшли в систему!");
     res.redirect("/auth");
   }
 })
+
 app.post("/delete-event/:id", setCurrentUser(client), async function (req, res) {
 
   let id = req.params.id;
   const events = client.db().collection('events');
 
   if (req.session.loggedIn) {
-    console.log("deleting event");
+    //console.log("deleting event");
     events.deleteOne({ _id: mongoose.Types.ObjectId(id) });
-    res.redirect("/events");
+    setFlashMessage(req, "Ви видалили подію!");
+    res.redirect("back");
+
   }
   else {
+    setFlashMessage(req, "Ви не увійшли в систему!");
     res.redirect("/auth");
   }
 })
 
-app.get("/personalAccount/:id", setCurrentUser(client), async function (req, response) {
+app.get("/personalAccount/:id", setCurrentUser(client), async function (req, res) {
   let id = req.params.id;
+  const flashMessage = req.session.flashMessage;
+  delete req.session.flashMessage;
   const users = client.db().collection('users');
   const events = client.db().collection('events');
-  const sportLevels = client.db().collection('sportLevel');
+
+  // TODO: додати івенти в яких береш участь
 
   if (req.session.loggedIn && id == req.session.userId) {
 
     var params = req.session.userId;
 
+    // TODO: перевіряти чи дійсно було оновлення
+
     users.findOne({ _id: mongoose.Types.ObjectId(params) }).then(function (user) {
       if (user != undefined) {
         events.find({ idOwner: mongoose.Types.ObjectId(params) }).toArray().then(function (ownEvent) {
-          console.log("свої івенти " + ownEvent);
           if (ownEvent != undefined) {
-            response.render("personalAccount",
+            res.render("personalAccount",
               {
-                user, persEvent: ownEvent
+                flashMessage, user, persEvent: ownEvent
               });
           }
           else {
-            response.render("personalAccount",
+            res.render("personalAccount",
               {
                 user
               });
@@ -246,11 +296,11 @@ app.get("/personalAccount/:id", setCurrentUser(client), async function (req, res
         })
       }
       else
-        response.redirect('/auth');
+        res.redirect('/auth');
     })
   }
   else {
-    response.redirect('/auth');
+    res.redirect('/auth');
   }
 });
 
@@ -258,7 +308,7 @@ app.post('/edit-profile', setCurrentUser(client), async function (req, res) {
   try {
     const users = client.db().collection('users');
     if (req.session.loggedIn) {
-      if (req.body.password != "") {
+      if (req.body.password != "") { //якщо пароль не змінився
         bcrypt.hash(req.body.password, 10, function (err, hash) {
 
           users.findOneAndUpdate({
@@ -274,11 +324,11 @@ app.post('/edit-profile', setCurrentUser(client), async function (req, res) {
               "addInfo": req.body.addInfo
             }
           }).then(function (user) {
-            res.redirect("/personalAccount/" + req.session.userId)
+            setFlashMessage(req, "Ви успішно оновили профіль!");
+            res.redirect("back");
           })
-
         });
-      } else {
+      } else { //якщо пароль змінився
         users.findOneAndUpdate({
           _id: mongoose.Types.ObjectId(req.session.userId)
         }, {
@@ -291,20 +341,19 @@ app.post('/edit-profile', setCurrentUser(client), async function (req, res) {
             "addInfo": req.body.addInfo
           }
         }).then(function (user) {
-          res.redirect("/personalAccount/" + req.session.userId)
+          setFlashMessage(req, "Ви успішно оновили профіль!");
+          res.redirect("back");
         })
       }
     }
   } catch (error) {
     console.log("Edit profile error" + error)
-
-
   }
 })
 
-app.get("/login", setCurrentUser(client), async function (request, response) {
+app.get("/login", setCurrentUser(client), async function (req, res) {
 
-  response.render("login", {
+  res.render("login", {
     error: ""
   });
 });
@@ -312,16 +361,16 @@ app.get("/login", setCurrentUser(client), async function (request, response) {
 app.get("/logout", setCurrentUser(client), async function (req, res) {
   req.session.userId = null;
   req.session.loggedIn = false;
-  res.redirect("/auth");
+  res.redirect("back");
 });
 
-app.post("/register", setCurrentUser(client), async function (req, response) {
+app.post("/register", setCurrentUser(client), async function (req, res) {
   try {
     const users = client.db().collection('users');
     users.findOne({ email: req.body.email }).then(function (user) {
 
       if (user) {
-        response.render("login", {
+        res.render("login", {
           error: "Вказана пошта вже зареєстрована"
         });
         return;
@@ -340,7 +389,8 @@ app.post("/register", setCurrentUser(client), async function (req, response) {
             "ShowPhone": req.body.phoneCheck,
           };
           users.insertOne(data);
-          response.redirect("/auth");
+          setFlashMessage(req, "Успішний вхід!");
+          res.redirect("/auth");
         })
       }
     })
@@ -350,24 +400,27 @@ app.post("/register", setCurrentUser(client), async function (req, response) {
   }
 });
 
-app.get("/auth", setCurrentUser(client), async function (request, response) {
-  response.render("auth", {
-    error: ""
+app.get("/auth", setCurrentUser(client), async function (req, res) {
+  const flashMessage = req.session.flashMessage;
+  delete req.session.flashMessage;
+  req.session.returnTo = req.path || '/';
+  res.render("auth", {
+    flashMessage, error: ""
   });
 });
 
-app.post("/enter", setCurrentUser(client), async function (req, response) {
+app.post("/enter", setCurrentUser(client), async function (req, res) {
 
   const users = client.db().collection('users');
 
   var params = req.body.email;
-  var error = "";
   users.findOne({ email: params })
     .then(function (result) {
 
       if (result == undefined) {
-        //console.log('Неправильна пошта або пароль');//?? чому однакові помилки
-        response.render("auth", {
+        //console.log('Неправильна пошта або пароль');
+        //?? чому однакові помилки
+        res.render("auth", {
           error: "Неправильна пошта або пароль"
         });
         return;
@@ -376,21 +429,20 @@ app.post("/enter", setCurrentUser(client), async function (req, response) {
       bcrypt.compare(req.body.password, result["password"], function (err, hash) {
         if (hash === false) {
           //console.log('Неправильна пошта або пароль');
-          response.render("auth", {
+          res.render("auth", {
             error: "Неправильна пошта або пароль"
           });
           return;
         }
-        //console.log('Успішний вхід');
         req.session.userId = result["_id"];
-        //console.log(req.session.userId);
         req.session.loggedIn = true;
 
-        /* response.render("auth", {
-          error: "Успішний вхід"
-        }); */
-
-        response.redirect("/");
+        setFlashMessage(req, "Успішний вхід!");
+        if (req.session.returnTo !== '/auth')
+          res.redirect(req.session.returnTo);
+        else
+          res.redirect('/');
+        delete req.session.returnTo;
         return;
       })
 
@@ -398,7 +450,7 @@ app.post("/enter", setCurrentUser(client), async function (req, response) {
     .catch(err => {
       console.log('Неправильна пошта або пароль'); // уточнити помилку
       console.error(err.message);
-      response.render("auth", {
+      res.render("auth", {
         error: "Неправильна пошта або пароль"
       });
       return;

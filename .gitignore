@@ -17,8 +17,6 @@ coverage/
 # Ignore log files
 *.log
 
-.swm/
-
 # Ignore IDE or editor-specific directories
-.idea/
 .vscode/
+.swm/

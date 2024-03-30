@@ -5,154 +5,138 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="public\css\style.css" />
   <link rel="icon" href="public/img/icon.ico" type="image/ico">
-
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap" rel="stylesheet">
-  <script src="src/js/main.js" defer></script>
+  <link rel="stylesheet" href="./../public/css/alert.css" />
+  <link rel="stylesheet" href="./../public/css/index.css" />
+  <link rel="stylesheet" href="./../public/css/navigation.css" />
+
+  <script src="./../src/js/utils/showAlert.js" defer></script>
+  <script src="/src/js/main.js" defer></script>
   <title>ToGetThere</title>
 </head>
 
 <body>
   <div class="wrapper">
+    <% if (flashMessage) { %>
+    <div class="alert alert-success" role="alert">
+      <%= flashMessage %>
+      <button type="button" class="close-alert" aria-label="Close" onclick="closeAlert(this)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <% } %>
+    <%- include ('navigation') %>
 
-    <nav>
-      <div class="ham">
-        <span class="bar1"></span>
-        <span class="bar2"></span>
-        <span class="bar3"></span>
+    <div class="header-wrapper">
+      <h1 class="header-h1">Тренуйся разом</h1>
+      <h2 class="header-h2">З НАМИ</h2>
+      <div class="wrapper-buttons">
+        <a href="/events" class="wrapper-button search-events">До заходів →</a>
+        <a href="/createEvent" class="wrapper-button create-events">Створити захід →</a>
       </div>
-      <ul class="nav-sub">
-        <li class="list-item"> <a href="/" class="wrapper-nav active">Головна</a></li>
-        <li class="list-item"><a href="/events" class="wrapper-nav">Заходи</a></li>
-
-        <%if( typeof currentUser !=="undefined" ){ %>
-
-        <li class=" list-item">
-          <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav">
-            Особистий кабінет
-          </a>
-        </li>
-        <%}else{%>
-        <li class="list-item">
-          <a href="/auth" class="wrapper-nav">
-            Вхід
-          </a>
-        </li>
-        <%}%>
-      </ul>
-    </nav>
-
-        <div class="header-wrapper">
-          <h1 class="header-h1">Тренуйся разом</h1>
-          <h2 class="header-h2">З НАМИ</h2>
-        <div class="wrapper-buttons">
-          <a href="/events" class="wrapper-button search-events">До заходів →</a>
-          <a href="/createEvent" class="wrapper-button create-events">Створити захід →</a>
-        </div>
-  </div>
+    </div>
 
   </div>
   <% if (massEvent.length> 0) { %>
-        <div class="events">
-          <div class="header-events">
-            <h3 class="header-events-h3">Популярні заходи</h3>
-            <a href="/events" class="events-all">Дивитися усі</a>
+  <div class="events">
+    <div class="header-events">
+      <h3 class="header-events-h3">Популярні заходи</h3>
+      <a href="/events" class="events-all">Дивитися усі</a>
+    </div>
+
+    <div class="events-cards">
+      <% massEvent.forEach(item=> {%>
+      <div class="card">
+        <div class="top-card-event">
+
+          <div class="city-event">
+            <img src="public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
+            <p class="city-event-name">
+              <%=item.city%>
+            </p>
           </div>
-
-          <div class="events-cards">
-            <% massEvent.forEach(item=> {%>
-            <div class="card">
-              <div class="top-card-event">
-
-                <div class="city-event">
-                  <img src="public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
-                  <p class="city-event-name">
-                    <%=item.city%>
-                  </p>
-                </div>
-              </div>
-              <h3 class="type-event-name">
-                <%=item.name%>
-              </h3>
-              <p class="place-event-name">
-                <%=item.place%>
-              </p>
-              <div class="date-time">
-                <div class="date-event">
-                  <img src="public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
-                  <p class="date-event-name">
-                    <%=item.date.split("-").reverse().join('.')%>
-                  </p>
-                </div>
-                <div class="time-event">
-                  <img src="public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
-                  <p class="time-event-name">
-                    <%=item.time%>
-                  </p>
-                </div>
-              </div>
-              <div class="button-event">
-                <a href="/event-card/<%=item['_id']%>" class="button-more">Детальніше</a>
-              </div>
-            </div>
-            <%})%>
+        </div>
+        <h3 class="type-event-name">
+          <%=item.name%>
+        </h3>
+        <p class="place-event-name">
+          <%=item.place%>
+        </p>
+        <div class="date-time">
+          <div class="date-event">
+            <img src="public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
+            <p class="date-event-name">
+              <%=item.date.split("-").reverse().join('.')%>
+            </p>
           </div>
-          <% } %>
-          <div class="about">
-            <div class="about-img"> </div>
-            <div class="about-info">
-              <h3 class="about-h3"> Про нас</h3>
-              <p class="about-text">
-                ToGetThere – зручний сервіс для організації занять спортом (можливість знайти партнера для спорту або
-                зібрати
-                команду, визначити місце для тренування, зареєструватися на спортивні змагання, приєднатися до спортивних
-                спільнот та багато іншого).
-                <br />
-                <br />
-                Використовуючи ToGetThere, ви завжди зможете спортивно провести час із цікавими людьми у вашому місті.
-              </p>
-            </div>
+          <div class="time-event">
+            <img src="public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
+            <p class="time-event-name">
+              <%=item.time%>
+            </p>
           </div>
-          <div class="how-works">
-            <h3 class="how-works-h3">Як це працює?</h3>
-            <div class="how-works-items">
-              <div class="how-works-item">
-                <img src="public/img/user.svg" alt="registration" class="how-works-img" height="85" width="85">
-                <h4 class="how-works-item-h4">Реєструйся</h4>
-                <p class="how-works-item-text">Авторизуйся у 2 кліка за номером телефону та поштою</p>
+        </div>
+        <div class="button-event">
+          <a href="/event-card/<%=item['_id']%>" class="button-more">Детальніше</a>
+        </div>
+      </div>
+      <%})%>
+    </div>
+    <% } %>
+    <div class="about">
+      <div class="about-img"> </div>
+      <div class="about-info">
+        <h3 class="about-h3"> Про нас</h3>
+        <p class="about-text">
+          ToGetThere – зручний сервіс для організації занять спортом (можливість знайти партнера для спорту або
+          зібрати
+          команду, визначити місце для тренування, зареєструватися на спортивні змагання, приєднатися до спортивних
+          спільнот та багато іншого).
+          <br />
+          <br />
+          Використовуючи ToGetThere, ви завжди зможете спортивно провести час із цікавими людьми у вашому місті.
+        </p>
+      </div>
+    </div>
+    <div class="how-works">
+      <h3 class="how-works-h3">Як це працює?</h3>
+      <div class="how-works-items">
+        <div class="how-works-item">
+          <img src="public/img/user.svg" alt="registration" class="how-works-img" height="85" width="85">
+          <h4 class="how-works-item-h4">Реєструйся</h4>
+          <p class="how-works-item-text">Авторизуйся у 2 кліка за номером телефону та поштою</p>
 
-              </div>
-              <div class="how-works-item">
-                <img src="public/img/check-form-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
-                <h4 class="how-works-item-h4">Створюй заходи</h4>
-                <p class="how-works-item-text">Почати спільні заняття спортом дуже просто: вкажи вид спорту, коли і де ти
-                  хотів
-                  би ним зайнятися</p>
+        </div>
+        <div class="how-works-item">
+          <img src="public/img/check-form-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <h4 class="how-works-item-h4">Створюй заходи</h4>
+          <p class="how-works-item-text">Почати спільні заняття спортом дуже просто: вкажи вид спорту, коли і де ти
+            хотів
+            би ним зайнятися</p>
 
-              </div>
-              <div class="how-works-item">
-                <img src="public/img/padnote-check-box-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
-                <h4 class="how-works-item-h4">Знаходь заходи</h4>
-                <p class="how-works-item-text">На основі даних, отриманих з твого облікового запису та гео-локації,
-                  ToGetThere
-                  запропонує найближчі плановані заходи</p>
-              </div>
-              <div class="how-works-item">
-                <img src="public/img/football.svg" alt="create events" class="how-works-img" height="85" width="85">
-                <h4 class="how-works-item-h4">Займайся спортом</h4>
-                <p class="how-works-item-text">Активно та спортивно проводи час із цікавими людьми у твоєму місті! Дружи
-                  та
-                  займайся спортом</p>
+        </div>
+        <div class="how-works-item">
+          <img src="public/img/padnote-check-box-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <h4 class="how-works-item-h4">Знаходь заходи</h4>
+          <p class="how-works-item-text">На основі даних, отриманих з твого облікового запису та гео-локації,
+            ToGetThere
+            запропонує найближчі плановані заходи</p>
+        </div>
+        <div class="how-works-item">
+          <img src="public/img/football.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <h4 class="how-works-item-h4">Займайся спортом</h4>
+          <p class="how-works-item-text">Активно та спортивно проводи час із цікавими людьми у твоєму місті! Дружи
+            та
+            займайся спортом</p>
 
-              </div>
-            </div>
-          </div>
-          <!--<div class="form-registration"></div>-->
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-registration"></div>-->
 </body>
 
 </html>

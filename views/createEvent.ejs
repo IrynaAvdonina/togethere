@@ -5,15 +5,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="public/css/createEvent.css" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
   <link rel="icon" href="public/img/icon.ico" type="image/ico">
+  <link rel="stylesheet" href="/public/css/createEvent.css" />
+  <link rel="stylesheet" href="./../public/css/navigation.css" />
 
   <script src="src/js/api/getCities.js" defer></script>
-  <script src="src/js/api/getKindSport.js" defer></script>
   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin="" defer></script>
   <script src="src/js/utils/showMap.js" defer></script>
   <script src="src/js/main.js" defer></script>
@@ -24,31 +25,7 @@
 <body>
 
   <div class="wrapper">
-    <nav>
-      <div class="ham">
-        <span class="bar1"></span>
-        <span class="bar2"></span>
-        <span class="bar3"></span>
-      </div>
-      <ul class="nav-sub">
-        <li class="list-item"> <a href="/" class="wrapper-nav ">Головна</a></li>
-        <li class="list-item"><a href="/events" class="wrapper-nav">Заходи</a>
-        </li>
-        <%if(typeof currentUser!=="undefined" ){ %>
-        <li class="list-item">
-          <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav">
-            Особистий кабінет
-          </a>
-        </li>
-        <%}else{%>
-        <li class="list-item">
-          <a href="/auth" class="wrapper-nav">
-            Вхід
-          </a>
-        </li>
-        <%}%>
-      </ul>
-    </nav>
+    <%- include ('navigation') %>
 
     <div class="header-wrapper">
       <h1 class="header-h1">СТВОРЕННЯ ЗАХОДУ</h1>
@@ -60,7 +37,7 @@
 
         <div class="form-name div">
           <label for="" class="form-name_label">Назва заходу</label>
-          <input type="text" name="name" id="" required placeholder="Футбол">
+          <input type="text" name="name" id="" required placeholder="Футбол" value="Футбол">
         </div>
 
         <div class="form-type div">
@@ -68,61 +45,61 @@
           <select name="type" required>
             <option value="" disabled selected hidden>Виберіть вид спорту</option>
             <%- selectType %>
-        </select>
-  </div>
+          </select>
+        </div>
 
-  <div class="form-city div">
-    <label for="" class="form-city_label">Місто</label>
-    <input name="city" list="cities" placeholder="Введіть місто" required />
-    <datalist id="cities" name="cities">
-    </datalist>
-  </div>
+        <div class="form-city div">
+          <label for="" class="form-city_label">Місто</label>
+          <input value="НІКОПОЛЬ" name="city" list="cities" placeholder="Введіть місто" required />
+          <datalist id="cities" name="cities">
+          </datalist>
+        </div>
 
-  <div class="form-date div">
-    <label for="" class="form-date_label">Дата</label>
-    <input type="date" name="date" id="" placeholder="23.05" required>
-  </div>
+        <div class="form-date div">
+          <label for="" class="form-date_label">Дата</label>
+          <input type="date" name="date" id="" value="23.05.2024" required>
+        </div>
 
-  <div class="form-time div">
-    <label for="" class="form-time_label">Час</label>
-    <input type="time" name="time" id="" placeholder="10:05" required>
-  </div>
+        <div class="form-time div">
+          <label for="" class="form-time_label">Час</label>
+          <input type="time" name="time" id="" placeholder="10:05" value="12:00" required>
+        </div>
 
-  <div class="form-level div">
-    <label for="" class="form-level_label">Рівень</label>
-    <select name="level" required>
-      <option value="" disabled selected hidden>Виберіть рівень </option>
-      <%- selectLevel %>
-    </select>
-  </div>
+        <div class="form-level div">
+          <label for="" class="form-level_label">Рівень</label>
+          <select name="level" required>
+            <option value="" disabled selected hidden>Виберіть рівень </option>
+            <%- selectLevel %>
+          </select>
+        </div>
 
-  <div class="form-addInfo div">
-    <label for="" class="form-addInfo_label">Додаткова інформація</label>
-    <textarea name="addInfo" id="addInfo" rows="5" placeholder="Інвентар і т.д"></textarea>
-  </div>
-  </div>
+        <div class="form-addInfo div">
+          <label for="" class="form-addInfo_label">Додаткова інформація</label>
+          <textarea name="addInfo" id="addInfo" rows="5" placeholder="Інвентар і т.д"></textarea>
+        </div>
+      </div>
 
-  <div class="form-right">
-    <div class="form-place div">
-      <label for="" class="form-place_label">Місце проведення</label>
-      <input type="text" name="place" id="" placeholder="Парк Перемоги" required>
-    </div>
-    <div class="form-maxPart div">
-      <label for="" class="form-maxPart_label">Максимальна кількість учасників</label>
-      <div class="range-maxpart">
-        <input type="number" name="maxPart" id="" placeholder="1" min="1" max="20" step="1" required>
+      <div class="form-right">
+        <div class="form-place div">
+          <label for="" class="form-place_label">Місце проведення</label>
+          <input type="text" name="place" id="" value="Парк Перемоги" required>
+        </div>
+        <div class="form-maxPart div">
+          <label for="" class="form-maxPart_label">Максимальна кількість учасників</label>
+          <div class="range-maxpart">
+            <input type="number" name="maxPart" id="" value="15" min="1" max="20" step="1" required>
+          </div>
+        </div>
+
+        <input type="text" name="map" id="mapInput" style="display:none">
+        <div id="map" data-lat="" data-long="" name="map">
+
+        </div>
+        <div class="button-create-event">
+          <button class="btn_create-event" type="submit">Створити</button>
+        </div>
       </div>
     </div>
-
-    <input type="text" name="map" id="mapInput" style="display:none">
-    <div id="map" data-lat="" data-long="" name="map">
-
-    </div>
-    <div class="button-create-event">
-      <button class="btn_create-event" type="submit">Створити</button>
-    </div>
-  </div>
-  </div>
   </form>
 
 

@@ -2,32 +2,10 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
-
-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 65px;
-  padding-top: 40px;
-}
-.wrapper-nav {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  font-size: 14px;
-  padding-left: 70px;
-  letter-spacing: 0.06em;
-}
-.active {
-  color: #6fcf97;
-}
-
-
-
-
 
 .header-h1 {
   font-weight: 700;
@@ -36,46 +14,55 @@ nav {
   font-size: 90px;
   text-align: center;
 }
+
 .form_auth {
   display: flex;
   margin: 50px 40px 0 40px;
   flex-direction: column;
   align-items: center;
 }
+
 .form_auth label {
-  
+
   font-weight: 500;
   font-size: 20px;
   color: rgba(0, 0, 0, 0.82);
   margin-right: 40px;
 }
+
 .form_auth .div {
-  
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 50px;
 }
-.message{
+
+.message {
   color: red;
   margin-bottom: 50px;
-  border-bottom: 1px solid red;padding-bottom: 10px
+  border-bottom: 1px solid red;
+  padding-bottom: 10px
 }
+
 .form_auth input,
 select,
 textarea {
   width: 220px;
 }
-.link-login{
+
+.link-login {
   align-self: center;
   color: #000;
 }
+
 .buttons-auth {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-.btn_auth{
+
+.btn_auth {
   width: 194px;
   height: 50px;
   border: none;
@@ -83,101 +70,50 @@ textarea {
   border-radius: 60px;
   color: white;
   font-family: 'Montserrat', sans-serif;
-margin-bottom: 60px;
+  margin-bottom: 60px;
   cursor: pointer;
 }
 
-.ham {
-  display: none;
-  padding: 5px;
-  cursor: pointer;
-}
-.bar1,
-.bar2,
-.bar3 {
-  display: block;
-  width: 35px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: #ffff;
-  transition: 0.4s;
-  border-radius: 5px;
-}
-.nav-sub {
-  display: flex;
-  justify-content: space-between;
-}
-.list-item {
-  padding: 17px;
-  list-style: none;
-}
-.nav-link {
-  color: inherit;
-  text-decoration: none;
-}
-input, textarea{
+input,
+textarea {
   font-family: 'Montserrat', sans-serif;
 }
-input{
+
+input {
   font-family: 'Montserrat', sans-serif;
   border: none;
   border-bottom: 1px solid rgb(78, 78, 78);
 }
+
 @media screen and (max-width: 767px) {
-  .ham {
-    display: block;
-  }
-  .change .bar1 {
-    transform: rotate(45deg) translate(8px, 3px);
-  }
-  .change .bar2 {
-    opacity: 0;
-  }
-  .change .bar3 {
-    transform: rotate(-45deg) translate(8px, -3px);
-  }
-  .nav-sub {
-    position: absolute;
-    top: 10vh;
-    right: 0;
-    margin-top: 19px;
-    flex-direction: column;
-    background-color: rgba(225, 225, 225, 0.351);
-    border-radius: 20px;
-    transition: transform 0.5s ease-in-out;
-    transform: translate(100%);
-    display: none;
-  }
-  .nav-change {
-    transform: translate(0%);
-    margin-right: 12px;
-    margin-top: 19px;
-    padding: 0;
-    display: flex;
-    width: 90%;
-  }
+
   .header-h1 {
     padding-top: 160px;
     font-size: 48px;
     margin-left: 0;
   }
+
   .header-wrapper {
     margin: 0;
   }
+
   .form_auth {
-    margin:80px 20px 20px;
+    margin: 80px 20px 20px;
   }
-  
+
   .form_auth input,
   select,
   textarea {
     width: 200px;
   }
+
   .form_personal-info label {
     font-size: 16px;
     margin-right: 10px;
   }
-  .btn_change, .btn_save {
+
+  .btn_change,
+  .btn_save {
     margin-right: 10px;
     margin-bottom: 20px;
   }

@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="public/css/events.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="icon" href="public/img/icon.ico" type="image/ico">
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./../public/css/navigation.css" />
+  <link rel="stylesheet" href="public/css/events.css" />
 
   <script src="src/js/main.js" defer></script>
   <script src="src/js/api/getCities.js" defer></script>
@@ -19,30 +19,7 @@
 
 <body>
   <div class="wrapper">
-    <nav>
-      <div class="ham">
-        <span class="bar1"></span>
-        <span class="bar2"></span>
-        <span class="bar3"></span>
-      </div>
-      <ul class="nav-sub">
-        <li class="list-item"> <a href="/" class="wrapper-nav ">Головна</a></li>
-        <li class="list-item"><a href="/events" class="wrapper-nav active">Заходи</a></li>
-        <%if(typeof currentUser!=="undefined" ){ %>
-        <li class="list-item">
-          <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav">
-            Особистий кабінет
-          </a>
-        </li>
-        <%}else{%>
-        <li class="list-item">
-          <a href="/auth" class="wrapper-nav">
-            Вхід
-          </a>
-        </li>
-        <%}%>
-      </ul>
-    </nav>
+    <%- include ('navigation') %>
 
     <div class="header-wrapper ">
       <h1 class="header-h1">СПОРТИВНІ ЗАХОДИ</h1>
@@ -70,34 +47,34 @@
           <select name="type" id="filterType">
             <option value="" disabled selected hidden>Виберіть вид спорту</option>
             <%- selectType %>
-        </select>
-        <hr class="line">
-  </div>
+          </select>
+          <hr class="line">
+        </div>
 
-  <div class="filter-section">
-    <p class="section-name">Рівень:</p>
-    <select name="level" id="filterLevel">
-      <option value="" disabled selected hidden>Виберіть рівень</option>
+        <div class="filter-section">
+          <p class="section-name">Рівень:</p>
+          <select name="level" id="filterLevel">
+            <option value="" disabled selected hidden>Виберіть рівень</option>
 
-      <%- selectLevel %>
+            <%- selectLevel %>
 
-    </select>
-    <hr class="line">
-  </div>
+          </select>
+          <hr class="line">
+        </div>
 
-  <div class="filter-section">
-    <p class="section-name">Дата:</p>
-    <input type="date" name="date" id="filterDate">
-    <hr class="line">
-  </div>
-  <button class="btn-filter" type="submit" name="submit"> Показати</button>
-  <div class="cancel-filter">
-    <!--a-->
-    <img src="public\img\cancel.svg" alt="X" class="filterCancelSvg">
+        <div class="filter-section">
+          <p class="section-name">Дата:</p>
+          <input type="date" name="date" id="filterDate">
+          <hr class="line">
+        </div>
+        <button class="btn-filter" type="submit" name="submit"> Показати</button>
+        <div class="cancel-filter">
+          <!--a-->
+          <img src="public\img\cancel.svg" alt="X" class="filterCancelSvg">
 
-    <input type="reset" value="Скасувати фільтр" class="cancel-text">
-    </form>
-  </div>
+          <input type="reset" value="Скасувати фільтр" class="cancel-text">
+      </form>
+    </div>
   </div>
   <div class="events-card">
     <% if (massEvent.length> 0) { %>
