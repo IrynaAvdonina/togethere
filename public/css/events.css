@@ -3,77 +3,64 @@
   box-sizing: border-box;
 }
 
+:root {
+  font-size: 16px;
+  --main-color: #eb5757;
+  --text-color: #333333;
+  --background-color: #e5e5e5;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
-  background: #e5e5e5;
+  background: var(--background-color);
 }
 
 .wrapper {
-  position: relative;
-  height: 311px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: linear-gradient(0deg,
-      rgba(0, 0, 0, 0.35),
-      rgba(0, 0, 0, 0.35)),
-    url('../img/sportsman2.jpeg');
-}
-
-.header-wrapper {
-  position: absolute;
-  top: 40%;
-  left: 20%;
-}
-
-.header-h1 {
-  font-weight: 700;
-  font-size: 76px;
-  color: white;
+  background-image: linear-gradient(0deg, #00000059, #00000059), url('../img/jpeg-optimizer_sportsman2.webp');
 }
 
 .content {
   display: flex;
-  margin-top: 80px;
+  margin: 2.5rem 1.25rem;
 }
 
 .filter {
-  min-width: 250px;
   height: 100%;
   background: #ffffff;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 2.5rem #0000000d;
   border-radius: 10px;
-  padding: 20px;
-  margin: 0 30px 40px;
+  padding: 2rem;
+  margin-left: 3rem;
+}
+
+.filter-header,
+.section-name {
+  font-weight: 700;
+  margin-bottom: 1.25rem;
 }
 
 .filter-header {
-  font-weight: 700;
-  font-size: 24px;
-  color: #eb5757;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--main-color);
 }
 
 .section-name {
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 17px;
-
+  font-size: 0.875rem;
   color: #302f2f;
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 label input {
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
 
 .section-select select {
   width: 75%;
-  height: 30px;
+  height: 1.875rem;
 }
 
 .line {
@@ -85,190 +72,87 @@ label input {
   padding: 0;
 }
 
-.btn-filter {
-  width: 75%;
-  height: 35px;
-  background: #eb5757;
+.btn-filter,
+.cancel-text {
   border-radius: 40px;
   border: none;
-  color: #fff;
   font-family: 'Montserrat', sans-serif;
-  margin: 25px 10px;
-  font-size: 15px;
+  font-size: 1rem;
+}
+
+.btn-filter {
+  width: 75%;
+  height: 2.25rem;
+  background: var(--main-color);
+  color: #fff;
+  margin: 1.5rem 0.625rem;
 }
 
 .btn-filter:hover {
-  color: #eb5757;
+  color: var(--main-color);
   background-color: transparent;
 }
 
 .cancel-filter {
   display: flex;
   justify-content: space-evenly;
-  padding: 8px 13px;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
-
 }
 
 .cancel-text:hover {
   color: #ffff;
-  background-color: #eb5757;
-
+  background-color: var(--main-color);
 }
 
 .cancel-text {
-  color: #eb5757;
+  color: var(--main-color);
   background-color: transparent;
-  border-radius: 40px;
-  font-family: 'Montserrat', sans-serif;
-  padding: 8px;
-  font-size: 15px;
-  border: none;
+  padding: 0.5rem;
   cursor: pointer;
   transition-duration: 0.4s;
-
 }
 
 .events-card {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 0 25px;
+  margin: 0 2.5rem 1rem;
+  gap: 3rem;
 }
 
-.card {
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-  background-image: url(../img/fon.jpg);
-  background-size: cover;
-  padding: 0 60px;
-  margin: 0 14px 50px 0;
-  max-width: 370px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-height: 370px;
-}
-
-.top-card-event,
-.date-event,
-.time-event {
-  display: flex;
-  align-items: center;
-  padding-top: 20px;
-}
-
-.name-event,
-.city-event {
-  display: flex;
-  align-items: center;
-  padding-bottom: 15px;
-}
-
-.name-event-a,
-.city-event-name,
-.place-event-name,
-.date-event-name,
-.time-event-name {
-  font-weight: 500;
-  font-size: 16px;
-  text-decoration: none;
-  color: #333333;
-  padding-left: 8px;
-}
-
-.name-event-a,
-.city-event-name,
-.date-event-name,
-.time-event-name {
-  padding-left: 8px;
-}
-
-.type-event-name {
-  font-weight: 700;
-  font-size: 40px;
-  color: #333333;
-  padding-bottom: 15px;
-}
-
-/*.button-more {
-  width: 186px;
-  font-size: 16px;
-  background: #eb5757;
-  border-radius: 40px;
-  border: none;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
-  text-align: center;
-  margin: 20px 0;
-  padding: 5px;
-}*/
-.button-event {
-  margin: 21px 0;
-  width: 200px;
-}
-
-.button-more {
-  font-size: 16px;
-  background: #eb5757;
-  border-radius: 40px;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px 40px;
-  transition: all 0.6s ease-in-out;
-}
-
-.button-more:hover {
-  box-shadow: 0 5px 10px rgb(103, 103, 103);
-}
-
-.pagination {
-  display: none;
-}
-
-.pagination-ul {
-  display: none;
-  margin: 40px 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-
-.pagination-ul li {
-  padding-right: 35px;
-}
-
-.pagination-ul li a {
-  color: rgb(46, 46, 46);
-  text-decoration: none;
-}
-
-@media screen and (max-width: 767px) {
-
-  .card {
-    padding: 0px 31px;
-    width: 315px;
-  }
-
-  .wrapper {
-    height: 500px;
-  }
-
+@media screen and (max-width:1116px) {
   .content {
     flex-direction: column;
-    margin-top: 45px;
+    align-items: center;
+    margin-top: 1.25rem;
   }
 
-  .header-h1 {
-    font-size: 45px;
-    margin-top: 136px;
+  .filter {
+    cursor: pointer;
+    padding: 0.8rem;
+    margin-bottom: 1.1rem;
   }
 
-  .header-wrapper {
-    position: absolute;
-    top: 40%;
-    left: 10%;
+  .filter-header {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .filter-body {
+    visibility: hidden;
+    transition: max-height 0.4s ease-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .filter-body.expanded {
+    visibility: visible;
+    max-height: 500px;
+  }
+
+  .events-card {
+    justify-content: center;
   }
 
   .section-select select,
@@ -276,11 +160,32 @@ label input {
     margin: 3px;
   }
 
-  .filter {
-    max-width: 220px;
+  .section-name {
+    margin-right: 1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    margin: 1.5rem;
   }
 
-  .type-event-name {
-    font-size: 20px;
+  .events-card {
+    gap: 1rem;
+  }
+
+  .btn-filter {
+    margin: 1rem 0.3rem;
+  }
+
+  .filter {
+    margin-left: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+
+  .filter {
+    margin-bottom: 0.25rem;
   }
 }

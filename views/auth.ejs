@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="public/img/icon.ico" type="image/ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="./../public/img/icon96.ico" type="image/ico">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./../public/css/alert.css" />
+  <link rel="stylesheet" href="./../public/css/elements/alert.css" />
   <link rel="stylesheet" href="../public/css/auth.css" />
-  
+
   <script src="./../src/js/utils/showAlert.js" defer></script>
   <title>ToGetThere</title>
 </head>
@@ -37,13 +36,13 @@
       <%=error%>
     </div>
     <div class="form-email div">
-      <label for="" class="form-email_label">Email</label>
-      <input type="email" name="email" placeholder="name@example.com" required>
+      <label for="email" class="form-email_label">Email</label>
+      <input type="email" name="email" id="email" placeholder="name@example.com" required>
     </div>
 
     <div class="form-password div">
-      <label for="" class="form-password_label">Пароль</label>
-      <input type="password" name="password" required autocomplete="true" />
+      <label for="password" class="form-password_label">Пароль</label>
+      <input type="password" name="password" id="password" required autocomplete="current-password" />
     </div>
 
     <div class="buttons-auth">

@@ -10,44 +10,40 @@ body {
 .header-h1 {
   font-weight: 700;
   color: rgb(54, 54, 54);
-  padding-top: 100px;
-  font-size: 90px;
+  padding-top: 6.25rem;
+  font-size: 5rem;
   text-align: center;
 }
 
 .form_auth {
   display: flex;
-  margin: 50px 40px 0 40px;
+  margin: 3.25rem 2.5rem 0 2.5rem;
   flex-direction: column;
   align-items: center;
 }
 
 .form_auth label {
-
   font-weight: 500;
-  font-size: 20px;
+  font-size: 1.25rem;
   color: rgba(0, 0, 0, 0.82);
-  margin-right: 40px;
+  margin-right: 2.5rem;
 }
 
 .form_auth .div {
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 3.25rem;
 }
 
 .message {
   color: red;
-  margin-bottom: 50px;
+  margin-bottom: 3.25rem;
   border-bottom: 1px solid red;
-  padding-bottom: 10px
+  padding-bottom: 1.625rem
 }
 
-.form_auth input,
-select,
-textarea {
+.form_auth input {
   width: 220px;
 }
 
@@ -63,24 +59,22 @@ textarea {
 }
 
 .btn_auth {
-  width: 194px;
-  height: 50px;
+  width: 12.25rem;
+  height: 3.25rem;
   border: none;
   background: #eb5757;
   border-radius: 60px;
   color: white;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 60px;
+  margin-bottom: 3.75rem;
   cursor: pointer;
-}
-
-input,
-textarea {
-  font-family: 'Montserrat', sans-serif;
 }
 
 input {
   font-family: 'Montserrat', sans-serif;
+}
+
+input {
   border: none;
   border-bottom: 1px solid rgb(78, 78, 78);
 }
@@ -88,8 +82,8 @@ input {
 @media screen and (max-width: 767px) {
 
   .header-h1 {
-    padding-top: 160px;
-    font-size: 48px;
+    padding-top: 7rem;
+    font-size: 3rem;
     margin-left: 0;
   }
 
@@ -98,23 +92,18 @@ input {
   }
 
   .form_auth {
-    margin: 80px 20px 20px;
+    margin: 2.5rem 1.25rem 1.25rem;
   }
 
-  .form_auth input,
-  select,
-  textarea {
+  .form_auth .div {
+    flex-direction: column;
+  }
+
+  .form_auth label {
+    margin-bottom: 2.2rem;
+  }
+
+  .form_auth input {
     width: 200px;
-  }
-
-  .form_personal-info label {
-    font-size: 16px;
-    margin-right: 10px;
-  }
-
-  .btn_change,
-  .btn_save {
-    margin-right: 10px;
-    margin-bottom: 20px;
   }
 }

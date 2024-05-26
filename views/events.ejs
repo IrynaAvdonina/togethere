@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="public/img/icon.ico" type="image/ico">
+
+  <link rel="icon" href="./../public/img/icon96.ico" type="image/ico">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./../public/css/navigation.css" />
-  <link rel="stylesheet" href="public/css/events.css" />
+  <link rel="stylesheet" href="./../public/css/elements/navigation.css" />
+  <link rel="stylesheet" href="./../public/css/elements/wrapper.css" />
+  <link rel="stylesheet" href="./../public/css/events.css" />
+  <link rel="stylesheet" href="./../public/css/elements/card.css" />
 
   <script src="src/js/main.js" defer></script>
   <script src="src/js/api/getCities.js" defer></script>
@@ -30,113 +31,100 @@
   <div class="content">
     <div class="filter">
       <h3 class="filter-header">Фільтр</h3>
-
-      <form method="POST" action="/filter">
-        <div class="filter-section">
-          <p class="section-name">Місто</p>
-          <div class="section-select">
-            <input name="city" list="cities" placeholder="Введіть місто" id="filterCity" />
-            <datalist id="cities" name="cities">
-            </datalist>
+      <div class="filter-body">
+        <form method="POST" action="/filter">
+          <div class="filter-section">
+            <p class="section-name">Місто</p>
+            <div class="section-select">
+              <input name="city" list="cities" placeholder="Введіть місто" id="filterCity" />
+              <datalist id="cities" name="cities">
+              </datalist>
+            </div>
+            <hr class="line">
           </div>
-          <hr class="line">
-        </div>
 
-        <div class="filter-section">
-          <p class="section-name">Вид спорту:</p>
-          <select name="type" id="filterType">
-            <option value="" disabled selected hidden>Виберіть вид спорту</option>
-            <%- selectType %>
-          </select>
-          <hr class="line">
-        </div>
+          <div class="filter-section">
+            <p class="section-name">Вид спорту:</p>
+            <select name="type" id="filterType">
+              <option value="" disabled selected hidden>Виберіть вид спорту</option>
+              <%- selectType %>
+            </select>
+            <hr class="line">
+          </div>
 
-        <div class="filter-section">
-          <p class="section-name">Рівень:</p>
-          <select name="level" id="filterLevel">
-            <option value="" disabled selected hidden>Виберіть рівень</option>
+          <div class="filter-section">
+            <p class="section-name">Рівень:</p>
+            <select name="level" id="filterLevel">
+              <option value="" disabled selected hidden>Виберіть рівень</option>
 
-            <%- selectLevel %>
+              <%- selectLevel %>
 
-          </select>
-          <hr class="line">
-        </div>
+            </select>
+            <hr class="line">
+          </div>
 
-        <div class="filter-section">
-          <p class="section-name">Дата:</p>
-          <input type="date" name="date" id="filterDate">
-          <hr class="line">
-        </div>
-        <button class="btn-filter" type="submit" name="submit"> Показати</button>
-        <div class="cancel-filter">
-          <!--a-->
-          <img src="public\img\cancel.svg" alt="X" class="filterCancelSvg">
+          <div class="filter-section">
+            <p class="section-name">Дата:</p>
+            <input type="date" name="date" id="filterDate">
+            <hr class="line">
+          </div>
+          <button class="btn-filter" type="submit" name="submit"> Показати</button>
+          <div class="cancel-filter">
+            <!--a-->
+            <img src="public\img\cancel.svg" alt="X" class="filterCancelSvg">
 
-          <input type="reset" value="Скасувати фільтр" class="cancel-text">
-      </form>
-    </div>
-  </div>
-  <div class="events-card">
-    <% if (massEvent.length> 0) { %>
-    <% let anyFreeEvents = false; %>
-    <% massEvent.forEach(item=> {%>
-    <% if (item.participants.length < item.maxParticipants) { %>
-    <!-- Перевірка, чи не перевищено максимальну кількість учасників -->
-    <% anyFreeEvents = true; %>
-    <div class="card">
-      <div class="top-card-event">
-        <div class="name-event">
-        </div>
-        <div class="city-event">
-          <img src="public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
-          <p class="city-event-name">
-            <%=item.city%>
-          </p>
-        </div>
-      </div>
-      <h3 class="type-event-name">
-        <%=item.name%>
-      </h3>
-      <p class="place-event-name">
-        <%=item.place%>
-      </p>
-      <div class="date-time">
-        <div class="date-event">
-          <img src="public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
-          <p class="date-event-name">
-            <%=item.date.split("-").reverse().join('.')%>
-          </p>
-        </div>
-        <div class="time-event">
-          <img src="public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
-          <p class="time-event-name">
-            <%=item.time%>
-          </p>
-        </div>
-      </div>
-      <div class="button-event">
-        <a href="/event-card/<%=item['_id']%>" class="button-more">Детальніше</a>
+            <input type="reset" value="Скасувати фільтр" class="cancel-text">
+          </div>
+        </form>
       </div>
     </div>
-    <% } %>
-    <% }) %>
-    <% if (!anyFreeEvents) { %>
-    <h3 class="filter-header">Вільних подій немає</h3>
-    <% } %>
-    <% } else { %>
-    <h3 class="filter-header">Події відсутні</h3>
-    <% } %>
 
-  </div>
 
-  <div class="pagination">
-    <ul class="pagination-ul">
-      <li class="active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-    </ul>
+    <div class="events-card">
+      <% if (massEvent.length> 0) { %>
+      <% massEvent.forEach(item=> {%>
+      <div class="card">
+        <div class="top-card-event">
+          <div class="city-event">
+            <img src="public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
+            <p class="city-event-name">
+              <%=item.city%>
+            </p>
+          </div>
+        </div>
+        <h3 class="type-event-name">
+          <%=item.name%>
+        </h3>
+        <% if (item.place) { %>
+        <p class="place-event-name">
+          <%= item.place %>
+        </p>
+        <% } %>
+        <div class="date-time">
+          <div class="date-event">
+            <img src="public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
+            <p class="date-event-name">
+              <%=item.date.split("-").reverse().join('.')%>
+            </p>
+          </div>
+          <div class="time-event">
+            <img src="public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
+            <p class="time-event-name">
+              <%=item.time%>
+            </p>
+          </div>
+        </div>
+        <div class="button-event">
+          <a href="/event-card/<%=item['_id']%>" class="button-more">Детальніше</a>
+        </div>
+      </div>
+      <% }) %>
+      <% } else { %>
+      <h3 class="filter-header">Події відсутні</h3>
+      <% } %>
+
+    </div>
+
   </div>
 </body>
 

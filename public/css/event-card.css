@@ -17,17 +17,19 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-
-  margin: 80px 120px 80px 200px;
+  margin: 5% 5% 5% 10%;
+  padding-right: 2rem;
+  align-items: center;
 }
 
 .event-info {
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  width: 45%;
 }
 
 .event-owner {
   display: flex;
-  margin-left: 30px;
+  margin-left: 2rem;
   flex-direction: column;
 }
 
@@ -37,7 +39,7 @@ body {
 }
 
 .event-owner_name {
-  padding-left: 15px;
+  padding-left: 1rem;
   display: inline;
   cursor: pointer;
   color: white;
@@ -45,20 +47,25 @@ body {
 }
 
 .user-info {
-  display: none;
+  max-height: 0;
+  opacity: 0;
   justify-content: space-between;
-  margin-top: 14px;
+  margin-top: 1rem;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
 }
 
 .user-info-show {
   display: flex;
   flex-direction: column;
+  overflow-wrap: break-word;
+  max-height: 8.25rem;
+  opacity: 1;
 }
 
 .user-age,
 .user-addInfo-p,
 .user-links {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .user-links {
@@ -67,28 +74,29 @@ body {
   justify-content: space-around;
 }
 
-.user-link-phone,
-.user-link-tg,
-.user-link-insta {
+.user-link-phone {
   display: flex;
 }
 
 .user-links a {
-  margin-right: 15px;
+  margin-right: 1rem;
   text-decoration: none;
   cursor: pointer;
   color: rgb(51, 51, 51);
 }
 
 .user-links img {
-  margin-right: 5px;
-
+  margin-right: 0.25rem;
 }
 
 .event-name {
-  margin-top: 15px;
+  margin-top: 1rem;
+  overflow-wrap: break-word;
+}
+
+.event-name-h1 {
+  font-size: 5vw;
   font-weight: 900;
-  font-size: 50px;
   color: #333333;
 }
 
@@ -102,51 +110,67 @@ body {
 }
 
 .event-join {
-  width: 194px;
-  height: 50px;
+  width: 12.25rem;
+  height: 3rem;
   border: none;
   background: #eb5757;
   border-radius: 60px;
   color: white;
   font-family: 'Montserrat', sans-serif;
-  margin-right: 60px;
-  margin-top: 20px;
+  margin-right: 3.75rem;
+  margin-top: 1.25rem;
   cursor: pointer;
-
 }
 
 .event-about-list li {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  list-style-type: '🏀';
+  padding-inline-start: 1rem;
 }
 
 #map {
-  height: 400px;
-  width: 600px;
-  margin-left: 30px;
+  height: 25rem;
+  width: 50%;
+  min-width: 22rem;
+  margin-left: 2rem;
 }
 
-@media screen and (max-width: 767px) {
-
+@media screen and (max-width: 768px) {
   .content {
-    flex-direction: column;
-    margin: 0 20px 20px;
-    padding-top: 160px;
+    margin: 0 2rem;
+    padding-right: 0;
   }
 
-  .event-name {
-    font-size: 40px;
+  .event-info {
+    width: 90%;
+  }
+
+  .event-name-h1 {
+    font-size: 8vw;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .event-join {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
 
   .event-owner {
-    margin-top: 60px;
-    margin-left: 5px;
+    margin-top: 3.75rem;
+    margin-left: 0.25rem;
   }
 
   #map {
-    width: 300px;
+    width: 90%;
+    min-width: 15.5rem;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .event-name-h1 {
+    font-size: 2rem;
   }
 }

@@ -3,59 +3,31 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-color: var(#eb5757);
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
 
 .wrapper {
-  height: 721px;
-  background-size: 1686px;
-  background-repeat: no-repeat;
-  background-position: left;
-  background-image: linear-gradient(0deg,
-      rgba(0, 0, 0, 0.35),
-      rgba(0, 0, 0, 0.35)),
-    url('../img/sportswomen1.jpeg');
-}
-
-
-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 65px;
-  padding-top: 40px;
-}
-
-.wrapper-nav {
-  text-decoration: none;
-  color: white;
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  padding-left: 70px;
-  letter-spacing: 0.06em;
-}
-
-.active {
-  color: #6fcf97;
-}
-
-.menu-img {
-  display: none;
+  position: relative;
+  height: fit-content;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('../img/jpeg-optimizer_sportswomen1.webp') left/cover no-repeat;
+  padding-bottom: 13%;
 }
 
 .header-wrapper {
-  margin-left: 150px;
+  margin-left: 6.5rem;
 }
 
 .header-h1 {
   font-weight: 700;
-  font-size: 76px;
-  line-height: 88px;
+  font-size: 4.75rem;
+  line-height: 5.5rem;
   color: white;
-  padding-top: 160px;
+  padding-top: 10%;
 }
 
 @supports ((-webkit-text-stroke: 2px black)) {
@@ -63,31 +35,27 @@ nav {
     color: transparent;
     font-family: 'Raleway', sans-serif;
     -webkit-text-stroke: 2px white;
-    /*text-stroke: 2px white;*/
     text-shadow: none;
     font-weight: 900;
-    font-size: 96px;
-    margin-top: 15px;
+    font-size: 6rem;
+    margin-top: 1rem;
     letter-spacing: 0.06em;
   }
 }
 
 .wrapper-buttons {
-  margin-top: 50px;
+  margin-top: 3.25rem;
 }
 
 .wrapper-button {
-  /* width: 194px;
-  height: 50px;
-  border: none;*/
-  text-decoration: none;
-  background: #eb5757;
-  border-radius: 60px;
+  background: var(--main-color);
+  border-radius: 50px;
   color: white;
-  /*font-family: 'Montserrat', sans-serif;*/
-  margin-right: 40px;
   cursor: pointer;
-  padding: 20px 60px;
+  margin-right: 2.5rem;
+  padding: 1.25rem 3.75rem;
+  text-align: center;
+  text-decoration: none;
   transition: all 0.5s ease-in-out;
 }
 
@@ -98,237 +66,163 @@ nav {
 .header-events {
   display: flex;
   justify-content: space-between;
-  padding: 72px 73px 59px 62px;
+  padding: 4.5rem 4.5rem 3.75rem 3.75rem;
 }
 
-.header-events-h3 {
+.header-events-h3,
+.how-works-h3 {
   font-weight: 700;
-  font-size: 30px;
-  color: #eb5757;
+  font-size: 2rem;
+  color: var(--main-color);
 }
 
 .events-all {
   font-weight: 500;
-  font-size: 17px;
+  font-size: 1rem;
   text-decoration-line: underline;
   color: rgb(40, 40, 40);
 }
 
 .events-cards {
-  margin: 20px 50px 50px;
   display: flex;
   flex-wrap: wrap;
-}
+  justify-content: space-evenly;
+  gap: 1.5rem;
+  margin: 1.25rem 3.25rem 3.25rem;
 
-.card {
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-  background-image: url(../img/fon.jpg);
-  background-size: cover;
-  padding: 0 30px;
-  max-width: 340px;
-  margin: 0 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.top-card-event,
-.date-event,
-.time-event {
-  display: flex;
-  align-items: center;
-  padding-top: 20px;
-}
-
-.top-card-event {
-  justify-content: space-between;
-}
-
-.name-event,
-.city-event {
-  display: flex;
-  align-items: center;
-  padding-bottom: 15px;
-}
-
-.name-event-a,
-.city-event-name,
-.place-event-name,
-.date-event-name,
-.time-event-name {
-  font-weight: 500;
-  font-size: 16px;
-  text-decoration: none;
-  color: #333333;
-  padding-left: 8px;
-}
-
-.name-event-a,
-.city-event-name,
-.date-event-name,
-.time-event-name {
-  padding-left: 8px;
-}
-
-.type-event-name {
-  font-weight: 700;
-  font-size: 40px;
-  color: #333333;
-  padding-bottom: 15px;
-}
-
-.button-event {
-  margin: 30px 0;
-  width: 200px;
-}
-
-.button-more {
-  font-size: 16px;
-  background: #eb5757;
-  border-radius: 40px;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  padding: 10px 40px;
-  transition: all 0.6s ease-in-out;
-}
-
-.button-more:hover {
-  box-shadow: 0 5px 10px rgb(103, 103, 103);
 }
 
 .about {
   position: relative;
-  margin-top: 100px;
-  margin-bottom: 50px;
+  margin-top: 6.25rem;
+  margin-bottom: 3.25rem;
 }
 
 .about-img {
-  background-image: linear-gradient(0deg,
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.2)),
-    url(../img/about.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../img/jpeg-optimizer_about.webp) center/cover no-repeat;
   border-radius: 0 10px 10px 0;
-  height: 635px;
+  height: 39.75rem;
   width: 75%;
-  margin-right: 380px;
+  margin-right: 23.75rem;
 }
 
 .about-info {
   position: absolute;
-  padding: 35px;
-  top: 150px;
-  right: 200px;
-  width: 450px;
+  padding: 2.25rem;
+  top: 9.5rem;
+  right: 12.5rem;
+  width: 28.25rem;
   background: #ededed;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .about-h3 {
   font-weight: 700;
-  font-size: 24px;
-  color: #eb5757;
-  padding-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--main-color);
+  padding-bottom: 1.25rem;
 }
 
 .about-text {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 1rem;
+  line-height: 1.375rem;
   color: #282828;
 }
 
 .how-works {
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
 }
 
 .how-works-h3 {
-  font-weight: 700;
-  font-size: 32px;
   text-align: center;
-  color: #eb5757;
-  margin-bottom: 50px;
-  margin-top: 85px;
+  margin-bottom: 3.25rem;
+  margin-top: 2.25rem;
 }
 
 .how-works-items {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  padding-bottom: 60px;
+  padding-bottom: 3.75rem;
 }
 
 .how-works-item {
-  width: 268px;
+  width: 16.75rem;
   text-align: center;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .how-works-item-h4 {
   font-weight: 700;
-  font-size: 22px;
-  color: #eb5757;
-  padding: 15px 0;
+  font-size: 1.375rem;
+  color: var(--main-color);
+  padding: 1rem 0;
 }
 
-/*----------------------------------------------------*/
 @media screen and (max-width: 765px) {
 
   .wrapper {
-    height: 741px;
-    background-size: 1147px;
     background-position: center;
   }
 
   .header-h1 {
-    font-size: 38px;
-    padding-top: 160px;
+    font-size: 2.5rem;
+    padding-top: 7%;
+    line-height: 1.6;
   }
 
   .header-wrapper {
-    padding-left: 10px;
-    margin: 0;
+    padding: 1rem;
+    margin: 1rem 1rem 0;
+  }
+
+  .header-events-h3 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
   }
 
   @supports ((-webkit-text-stroke: 2px black)) {
     .header-h2 {
-      font-size: 80px;
-      margin-top: 0;
-      margin-bottom: 100px;
+      font-size: 4rem;
+      margin-bottom: 2rem;
     }
   }
 
   .wrapper-buttons {
-    margin-top: 50px;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .wrapper-button {
-    margin: 0 60px 30px 10px;
+    margin: 0.5rem;
+    padding: 0.7rem 0.5rem;
+    width: fit-content;
   }
 
   .header-events {
     flex-wrap: wrap;
-    justify-content: flex-end;
-    padding: 72px 27px 20px 27px;
+    padding: 1.5rem;
   }
 
   .header-events-h3 {
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+  }
+
+  .events-all {
+    align-self: flex-end;
   }
 
   .events-cards {
-    flex-direction: column;
+    margin: 1rem;
   }
 
-  .card {
-    margin: 22px 0;
-    padding: 0 27px;
-    width: 270px;
+  .about,
+  .how-works-h3 {
+    margin-top: 3rem;
   }
 
   .about-img {
@@ -336,14 +230,14 @@ nav {
   }
 
   .about-info {
-    padding: 28px;
-    top: 191px;
-    right: 11px;
-    width: 309px;
+    padding: 1.75rem;
+    top: 12rem;
+    right: 0.7rem;
+    width: 19.25rem;
   }
 
   .about-text {
-    font-size: 15px;
+    font-size: 0.8rem;
   }
 
   .how-works-items {
@@ -352,8 +246,20 @@ nav {
   }
 }
 
-@media screen and (min-width: 766px) {
-  .header-events-h3 {
-    margin-right: 40px;
+@media screen and (max-width: 375px) {
+  .header-wrapper {
+    margin: 0;
+  }
+
+  .header-events {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 1.5rem 0.5rem 0;
+    margin: 0.5rem;
+  }
+
+  .wrapper-buttons {
+    justify-content: space-between;
   }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8">
@@ -7,9 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Веб-додаток для спільних занять спортом, ToGetThere">
 
-  <link rel="icon" href="public/img/icon.ico" type="image/ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="./../public/img/icon96.ico" type="image/ico">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../public/css/login.css" />
 
@@ -17,63 +16,65 @@
 </head>
 
 <body>
-  <div class="wrapper">
-
-    <div class="header-wrapper">
+  <div class="content">
+    <header class="header">
       <h1 class="header-h1">Реєстрація</h1>
-    </div>
-  </div>
-  <form action="/register" class="form_reg" method="post">
+    </header>
     <div class="message">
       <%=error%>
     </div>
-    <div class="form-name div">
-      <label for="" class="form-name_label">Ім'я</label>
-      <input class="form-name_input" name="name" list="names" placeholder="Введіть ім'я" required />
-    </div>
 
-    <div class="form-surname div">
-      <label for="" class="form-surname_label">Прізвище</label>
-      <input class="form-surname_input" name="surname" list="surnames" placeholder="Введіть прізвище" required />
-    </div>
+    <form action="/register" method="post">
+      <div class="form_reg">
+        <div class="form-name div">
+          <label for="name" class="form-name_label">Ім'я</label>
+          <input class="form-name_input" name="name" list="names" placeholder="Введіть ім'я" id="name" autocomplete="given-name" required />
+        </div>
 
-    <div class="form-dateBirth div">
-      <label for="" class="form-dateBirth_label">Дата народження</label>
-      <input class="form-dateBirth_input" type="date" name="date" id="" placeholder="Введіть дату народження">
-    </div>
+        <div class="form-surname div">
+          <label for="surname" class="form-surname_label">Прізвище</label>
+          <input class="form-surname_input" name="surname" list="surnames" placeholder="Введіть прізвище" id="surname" required />
+        </div>
 
-    <div class="form-addInfo div">
-      <label for="" class="form-addInfo_label">Додаткова інформація</label>
-      <textarea class="form-addInfo_txtarea" name="addInfo" id="addInfo" rows="5" placeholder="Введіть дод. інформацію. Наприклад: займаюсь футболом"></textarea>
-    </div>
+        <div class="form-dateBirth div">
+          <label for="date" class="form-dateBirth_label">Дата народження</label>
+          <input class="form-dateBirth_input" type="date" name="date" id="date" placeholder="Введіть дату народження" min="1930-01-01" max="2022-12-31">
+        </div>
 
-    <div class="form-email div">
-      <label for="" class="form-email_label">Email</label>
-      <input class="form-email_input" type="email" name="email" placeholder="name@example.com" required>
-    </div>
+        <div class="form-addInfo div">
+          <label for="addInfo" class="form-addInfo_label">Додаткова інформація</label>
+          <textarea class="form-addInfo_txtarea" name="addInfo" id="addInfo" rows="5" placeholder="Введіть дод. інформацію. Наприклад: займаюсь футболом"></textarea>
+        </div>
 
-    <div class="form-phone div">
-      <label for="" class="form-phone_label">Телефон</label>
-      <input class="form-phone_input" type="tel" name="phone" placeholder="+380666666666" required minlength="10" maxlength="13" />
-    </div>
-    <div class="form-phone-show">
-      <input type="checkbox" name="phoneCheck" id="" class="form-phoneCheck_input">
-      <label for="" class="form-phoneCheck_label">Показувати телефон для інших користувачів</label>
-    </div>
+        <div class="form-email div">
+          <label for="email" class="form-email_label">Email</label>
+          <input class="form-email_input" type="email" name="email" placeholder="name@example.com" id="email" required autocomplete="email">
+        </div>
 
-    <div class="form-password div">
-      <label for="" class="form-password_label">Пароль</label>
-      <input class="form-password_input" type="password" name="password" required minlength="5" />
+        <div class="form-phone div">
+          <label for="phone" class="form-phone_label">Телефон</label>
+          <input class="form-phone_input" type="tel" name="phone" placeholder="+380666666666" autocomplete="tel" required minlength="10" maxlength="13" id="phone" />
+        </div>
 
-    </div>
+        <div class="form-phone-show">
+          <label for="phoneCheck" class="form-phoneCheck_label">Показувати телефон для інших користувачів</label>
+          <input type="checkbox" name="phoneCheck" id="phoneCheck" class="form-phoneCheck_input">
+        </div>
 
-    <div class="buttons-reg">
-      <button type="submit" class="btn_reg">Зареєструватись</button>
-      <a class="link-enter" href="/auth">Вже маю аккаунт
-      </a>
-    </div>
+        <div class="form-password div">
+          <label for="password" class="form-password_label">Пароль</label>
+          <input class="form-password_input" type="password" name="password" id="password" required minlength="5" />
+        </div>
 
-  </form>
+        <div class="buttons-reg">
+          <button type="submit" class="btn_reg">Зареєструватись</button>
+          <a class="link-enter" href="/auth">Вже маю аккаунт
+          </a>
+        </div>
+      </div>
+    </form>
+
+  </div>
 </body>
 
 </html>

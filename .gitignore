@@ -16,6 +16,7 @@ coverage/
 
 # Ignore log files
 *.log
+*.txt
 
 # Ignore IDE or editor-specific directories
 .vscode/

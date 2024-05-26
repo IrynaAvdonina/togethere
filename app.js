@@ -26,7 +26,6 @@ const client = new MongoClient(mongodbUri,
     useUnifiedTopology: true,
   });
 
-
 try {
   client.connect();
   console.log("Connection OK");
@@ -53,7 +52,6 @@ app.use(bodyParser.urlencoded({
 app.use('/public', express.static('public'));
 app.use('/src', express.static('src'));
 app.use('/database', express.static('database'));
-app.use(setCurrentUser(client));
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
@@ -86,7 +84,7 @@ app.get("/events", setCurrentUser(client), async function (req, res) {
     const selectLevel = ejs.render(showOptions(levels));
     const selectType = ejs.render(showOptions(sportTypes));
 
-    events.find({}).toArray().then(function (massEvent) {
+    events.find({ $expr: { $lt: [{ $size: "$participants" }, { $toInt: "$maxParticipants" }] } }).toArray().then(function (massEvent) {
       res.render("events", {
         selectType, selectLevel, massEvent,
       });
@@ -121,6 +119,9 @@ app.post("/filter", setCurrentUser(client), async function (req, res) {
       condition["city"] = req.body.city;
     }
 
+    condition["$expr"] = {
+      $lt: [{ $size: "$participants" }, { $toInt: "$maxParticipants" }]
+    };
     events.find(condition).toArray().then(function (massEvent) {
       res.render("events", {
         selectType, selectLevel, massEvent

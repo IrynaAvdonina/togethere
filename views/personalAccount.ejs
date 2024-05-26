@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="./../public/img/icon.ico" type="image/ico">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="./../public/img/icon96.ico" type="image/ico">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./../public/css/alert.css" />
+  <link rel="stylesheet" href="./../public/css/elements/alert.css" />
+  <link rel="stylesheet" href="./../public/css/elements/card.css" />
   <link rel="stylesheet" href="../public/css/personAccount.css" />
-  <link rel="stylesheet" href="./../public/css/navigation.css" />
+  <link rel="stylesheet" href="./../public/css/elements/navigation.css" />
+  <link rel="stylesheet" href="./../public/css/elements/wrapper.css" />
+
 
   <script src="./../src/js/utils/showAlert.js" defer></script>
   <script src="/src/js/main.js" defer></script>
@@ -35,43 +37,43 @@
       <h1 class="header-h1">ОСОБИСТИЙ КАБІНЕТ</h1>
     </div>
   </div>
-  <div class="personal-info">
-    <form action="/edit-profile" class="form_personal-info" method="post">
+  <div class="form-personal-info">
+    <form action="/edit-profile" method="post" class="personal-info">
       <div class="form-left">
 
-        <div class="form-name div">
-          <label for="" class="form-name_label">Ім'я</label>
-          <input autocomplete="given-name" name="name" list="names" placeholder="Введіть ім'я" value="<%=user.name %>" required />
+        <div class="form-name section">
+          <label for="name" class="form-name_label">Ім'я</label>
+          <input autocomplete="given-name" name="name" list="names" placeholder="Введіть ім'я" value="<%=user.name %>" id="name" required />
         </div>
-        <div class="form-surname div">
-          <label autocomplete="family-name" for="" class="form-surname_label">Прізвище</label>
-          <input name="surname" list="surnames" placeholder="Введіть прізвище" value="<%=user.surname %>" required />
+        <div class="form-surname section">
+          <label autocomplete="family-name" for="surname" class="form-surname_label">Прізвище</label>
+          <input name="surname" list="surnames" placeholder="Введіть прізвище" id="surname" value="<%=user.surname %>" required />
         </div>
 
-        <div class="form-dateBirth div">
-          <label for="" class="form-dateBirth_label">Дата народження</label>
-          <input autocomplete="bday" type="date" name="date" id="" placeholder="Введіть дату народження" value="<%=user['date_bitrh'] %>">
+        <div class="form-dateBirth section">
+          <label for="date" class="form-dateBirth_label">Дата народження</label>
+          <input min="1930-01-01" max="2022-12-31" autocomplete="bday" type="date" name="date" id="date" placeholder="Введіть дату народження" value="<%=user['date_bitrh'] %>">
         </div>
-        <div class="form-addInfo div">
-          <label for="" class="form-addInfo_label">Додаткова інформація</label>
+        <div class="form-addInfo section">
+          <label for="addInfo" class="form-addInfo_label">Додаткова інформація</label>
           <textarea name="addInfo" id="addInfo" rows="5" placeholder="Введіть дод. інформацію. Наприклад: займаюсь футболом"><%=user.addInfo %></textarea>
         </div>
       </div>
 
       <div class="form-right">
-        <div class="form-email div">
-          <label for="" class="form-email_label">Email</label>
-          <input autocomplete="email" type="email" name="email" placeholder="Введіть пошту" value="<%=user.email %>" required>
+        <div class="form-email section">
+          <label for="email" class="form-email_label">Email</label>
+          <input autocomplete="email" type="email" id="email" name="email" placeholder="Введіть пошту" value="<%=user.email %>" required>
         </div>
 
-        <div class="form-phone div">
-          <label for="" class="form-phone_label">Телефон</label>
-          <input autocomplete="tel" type="tel" name="phone" placeholder="+380666666666" value="<%=user.phone %>" required minlength="10" />
+        <div class="form-phone section">
+          <label for="phone" class="form-phone_label">Телефон</label>
+          <input autocomplete="tel" type="tel" id="phone" name="phone" placeholder="+380666666666" value="<%=user.phone %>" required minlength="10" />
 
         </div>
-        <div class="form-password div">
-          <label for="" class="form-password_label">Пароль</label>
-          <input autocomplete="new-password" type="password" name="password" minlength="5" />
+        <div class="form-password section">
+          <label for="password" class="form-password_label">Пароль</label>
+          <input autocomplete="new-password" type="password" name="password" id="password" minlength="5" />
 
         </div>
 
@@ -122,7 +124,7 @@
         <div class="button-event">
           <a href="/event-card/<%=ev['_id']%>" class="button-more">Детальніше</a>
           <form action="/delete-event/<%=ev['_id']%>" method="post">
-            <button type="submit" class="button-del">Видалити</button>
+            <button type="submit" class="button-del">⨉</button>
           </form>
         </div>
       </div>

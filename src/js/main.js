@@ -16,6 +16,16 @@ if (eventOwnerLink) {
   });
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const filterHeader = document.querySelector('.filter-header');
+  const filterBody = document.querySelector('.filter-body');
+  filterHeader?.addEventListener('click', function () {
+    console.log(1)
+    filterBody.classList.toggle('expanded');
+  });
+});
+
+
 
 
 
