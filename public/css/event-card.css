@@ -130,6 +130,10 @@ body {
 
 #map {
   height: 25rem;
+}
+
+#map,
+.no-map {
   width: 50%;
   min-width: 22rem;
   margin-left: 2rem;
@@ -161,11 +165,12 @@ body {
     margin-left: 0.25rem;
   }
 
-  #map {
+  #map,
+  .no-map {
     width: 90%;
     min-width: 15.5rem;
     margin-left: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 

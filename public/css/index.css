@@ -14,7 +14,7 @@ body {
 .wrapper {
   position: relative;
   height: fit-content;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('../img/jpeg-optimizer_sportswomen1.webp') left/cover no-repeat;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(../img/sportswomen.webp) left/cover no-repeat;
   padding-bottom: 13%;
 }
 
@@ -99,7 +99,7 @@ body {
 }
 
 .about-img {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../img/jpeg-optimizer_about.webp) center/cover no-repeat;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../img/about.webp) center/cover no-repeat;
   border-radius: 0 10px 10px 0;
   height: 39.75rem;
   width: 75%;
@@ -199,7 +199,7 @@ body {
 
   .wrapper-button {
     margin: 0.5rem;
-    padding: 0.7rem 0.5rem;
+    padding: 1rem;
     width: fit-content;
   }
 

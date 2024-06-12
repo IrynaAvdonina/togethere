@@ -11,14 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./../public/css/elements/alert.css" />
   <link rel="stylesheet" href="./../public/css/elements/card.css" />
-  <link rel="stylesheet" href="../public/css/personAccount.css" />
+  <link rel="stylesheet" href="./../public/css/personal-account.css" />
   <link rel="stylesheet" href="./../public/css/elements/navigation.css" />
   <link rel="stylesheet" href="./../public/css/elements/wrapper.css" />
 
-
-  <script src="./../src/js/utils/showAlert.js" defer></script>
-  <script src="/src/js/main.js" defer></script>
-  <title>ToGetThere</title>
+  <script src="./../src/utils/showAlert.js" defer></script>
+  <script src="./../src/main.js" defer></script>
+  <title>Особистий кабінет | ToGetThere</title>
 </head>
 
 <body>
@@ -61,11 +60,6 @@
       </div>
 
       <div class="form-right">
-        <div class="form-email section">
-          <label for="email" class="form-email_label">Email</label>
-          <input autocomplete="email" type="email" id="email" name="email" placeholder="Введіть пошту" value="<%=user.email %>" required>
-        </div>
-
         <div class="form-phone section">
           <label for="phone" class="form-phone_label">Телефон</label>
           <input autocomplete="tel" type="tel" id="phone" name="phone" placeholder="+380666666666" value="<%=user.phone %>" required minlength="10" />
@@ -73,7 +67,7 @@
         </div>
         <div class="form-password section">
           <label for="password" class="form-password_label">Пароль</label>
-          <input autocomplete="new-password" type="password" name="password" id="password" minlength="5" />
+          <input placeholder="Введіть новий пароль" autocomplete="new-password" type="password" name="password" id="password" minlength="5" />
 
         </div>
 
@@ -95,7 +89,7 @@
       <div class="card">
         <div class="top-card-event">
           <div class="city-event">
-            <img src="/public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
+            <img src="./../public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
             <p class="city-event-name">
               <%=ev.city%>
             </p>
@@ -109,13 +103,13 @@
         </p>
         <div class="date-time">
           <div class="date-event">
-            <img src="/public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
+            <img src="./../public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
             <p class="date-event-name">
               <%=ev.date.split("-").reverse().join('.')%>
             </p>
           </div>
           <div class="time-event">
-            <img src="/public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
+            <img src="./../public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
             <p class="time-event-name">
               <%=ev.time%>
             </p>

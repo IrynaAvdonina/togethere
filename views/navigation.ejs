@@ -9,7 +9,7 @@
     <li class="list-item"><a href="/events" class="wrapper-nav">Заходи</a></li>
     <%if(typeof currentUser!="undefined" ){ %>
     <li class="list-item">
-      <a href="/personalAccount/<%=currentUser['_id']%>" class="wrapper-nav">
+      <a href="/personal-account/<%=currentUser['_id']%>" class="wrapper-nav">
         Особистий кабінет
       </a>
     </li>
@@ -22,30 +22,3 @@
     <%}%>
   </ul>
 </nav>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var menuLinks = document.querySelectorAll(".wrapper-nav");
-
-    function setActiveLink(currentUrl) {
-      menuLinks.forEach(function(link) {
-        if (link.getAttribute("href") === currentUrl) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      });
-    }
-
-    setActiveLink(window.location.pathname);
-
-    menuLinks.forEach(function(link) {
-      link.addEventListener("click", function(event) {
-        event.preventDefault();
-        var url = this.getAttribute("href");
-        setActiveLink(url); 
-        window.location.href = url; 
-      });
-    });
-  });
-</script>
-<!--TODO перенести скрипт кудись-->

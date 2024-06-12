@@ -20,6 +20,11 @@ textarea {
   margin: 1px;
 }
 
+textarea {
+  resize: none;
+  overflow-y: scroll;
+}
+
 input {
   border: none;
   border-bottom: 1px solid #4e4e4e;
@@ -28,7 +33,7 @@ input {
 .wrapper {
   background-image: linear-gradient(0deg,
       #00000059, #00000059),
-    url('../img/jpeg-optimizer_publicAcc.webp');
+    url(../img/public-acc.webp);
 }
 
 .personal-info {

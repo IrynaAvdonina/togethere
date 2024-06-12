@@ -17,7 +17,7 @@ body {
 
 .form_auth {
   display: flex;
-  margin: 3.25rem 2.5rem 0 2.5rem;
+  margin: 2rem 2.5rem 0 2.5rem;
   flex-direction: column;
   align-items: center;
 }
@@ -38,18 +38,19 @@ body {
 
 .message {
   color: red;
-  margin-bottom: 3.25rem;
-  border-bottom: 1px solid red;
-  padding-bottom: 1.625rem
+  text-align: center;
+  margin: 2rem 0;
 }
 
 .form_auth input {
   width: 220px;
 }
 
-.link-login {
+.link-login,
+.link-home {
   align-self: center;
   color: #000;
+  margin-bottom: 1rem;
 }
 
 .buttons-auth {
@@ -93,6 +94,11 @@ input {
 
   .form_auth {
     margin: 2.5rem 1.25rem 1.25rem;
+  }
+
+  .message {
+    font-size: 0.8rem;
+    margin: 0 0.5rem 2rem;
   }
 
   .form_auth .div {

@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="./../public/css/elements/navigation.css" />
   <link rel="stylesheet" href="./../public/css/elements/card.css" />
 
-  <script src="./../src/js/utils/showAlert.js" defer></script>
-  <script src="/src/js/main.js" defer></script>
+  <script src="./../src/utils/showAlert.js" defer></script>
+
+  <script src="./../src/main.js" defer></script>
   <title>ToGetThere</title>
 </head>
 
@@ -37,12 +38,12 @@
       <h2 class="header-h2">З НАМИ</h2>
       <div class="wrapper-buttons">
         <a href="/events" class="wrapper-button search-events">До заходів →</a>
-        <a href="/createEvent" class="wrapper-button create-events">Створити захід →</a>
+        <a href="/create-event" class="wrapper-button create-events">Створити захід →</a>
       </div>
     </div>
 
   </div>
-  <% if (massEvent.length> 0) { %>
+  <% if (eventsList.length> 0) { %>
   <div class="events">
     <div class="header-events">
       <h3 class="header-events-h3">Популярні заходи</h3>
@@ -50,12 +51,12 @@
     </div>
 
     <div class="events-cards">
-      <% massEvent.forEach(item=> {%>
+      <% eventsList.forEach(item=> {%>
       <div class="card">
         <div class="top-card-event">
 
           <div class="city-event">
-            <img src="public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
+            <img src="./../public/img/map.svg" alt="city" class="city-event-img" width="13" height="13">
             <p class="city-event-name">
               <%=item.city%>
             </p>
@@ -69,13 +70,13 @@
         </p>
         <div class="date-time">
           <div class="date-event">
-            <img src="public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
+            <img src="./../public/img/day.svg" alt="" class="date-event-img" width="13" height="13">
             <p class="date-event-name">
               <%=item.date.split("-").reverse().join('.')%>
             </p>
           </div>
           <div class="time-event">
-            <img src="public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
+            <img src="./../public/img/time.svg" alt="" class="time-event-img" width="13" height="13">
             <p class="time-event-name">
               <%=item.time%>
             </p>
@@ -107,13 +108,13 @@
       <h3 class="how-works-h3">Як це працює?</h3>
       <div class="how-works-items">
         <div class="how-works-item">
-          <img src="public/img/user.svg" alt="registration" class="how-works-img" height="85" width="85">
+          <img src="./../public/img/user.svg" alt="registration" class="how-works-img" height="85" width="85">
           <h4 class="how-works-item-h4">Реєструйся</h4>
           <p class="how-works-item-text">Авторизуйся у 2 кліка за номером телефону та поштою</p>
 
         </div>
         <div class="how-works-item">
-          <img src="public/img/check-form-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <img src="./../public/img/check-form.svg" alt="create events" class="how-works-img" height="85" width="85">
           <h4 class="how-works-item-h4">Створюй заходи</h4>
           <p class="how-works-item-text">Почати спільні заняття спортом дуже просто: вкажи вид спорту, коли і де ти
             хотів
@@ -121,14 +122,14 @@
 
         </div>
         <div class="how-works-item">
-          <img src="public/img/padnote-check-box-svgrepo-com.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <img src="./../public/img/padnote-check-box.svg" alt="create events" class="how-works-img" height="85" width="85">
           <h4 class="how-works-item-h4">Знаходь заходи</h4>
           <p class="how-works-item-text">На основі даних, отриманих з твого облікового запису та гео-локації,
             ToGetThere
             запропонує найближчі плановані заходи</p>
         </div>
         <div class="how-works-item">
-          <img src="public/img/football.svg" alt="create events" class="how-works-img" height="85" width="85">
+          <img src="./../public/img/football.svg" alt="create events" class="how-works-img" height="85" width="85">
           <h4 class="how-works-item-h4">Займайся спортом</h4>
           <p class="how-works-item-text">Активно та спортивно проводи час із цікавими людьми у твоєму місті! Дружи
             та

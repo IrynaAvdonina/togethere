@@ -16,7 +16,7 @@ body {
 }
 
 .wrapper {
-  background-image: linear-gradient(0deg, #00000059, #00000059), url('../img/jpeg-optimizer_sportsman2.webp');
+  background-image: linear-gradient(0deg, #00000059, #00000059), url(../img/sportsman.webp);
 }
 
 .content {

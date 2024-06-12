@@ -14,11 +14,16 @@ select {
   margin: 1px;
 }
 
+textarea {
+  resize: none;
+  overflow-y: scroll;
+}
+
 .wrapper {
   background-image: linear-gradient(0deg,
       rgba(0, 0, 0, 0.35),
       rgba(0, 0, 0, 0.35)),
-    url('../img/jpeg-optimizer_create-event.webp');
+    url(../img/create-event.webp);
 }
 
 .form_create-event {

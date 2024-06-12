@@ -7,22 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.css" />
+
   <link rel="icon" href="./../public/img/icon96.ico" type="image/ico">
   <link rel="stylesheet" href="./../public/css/elements/Leaflet.AnimatedSearchBox.css">
-  <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin="" defer></script>
-
-  <link rel="stylesheet" href="./../public/css/createEvent.css" />
+  <link rel="stylesheet" href="./../public/css/create-event.css" />
   <link rel="stylesheet" href="./../public/css/elements/navigation.css" />
   <link rel="stylesheet" href="./../public/css/elements/card.css" />
   <link rel="stylesheet" href="./../public/css/elements/wrapper.css" />
 
-  <script src="src/js/Leaflet.AnimatedSearchBox.js" defer></script>
-  <script src="src/js/api/getCities.js" defer></script>
-  <script src="src/js/utils/showMap.js" defer></script>
-  <script src="src/js/main.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.81.1/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 
-  <title>ToGetThere</title>
+  <script src="./../src/utils/Leaflet.AnimatedSearchBox.js" defer></script>
+  <script src="./../src/api/getCities.js" defer></script>
+  <script src="./../src/main.js" defer></script>
+  <script src="./../src/api/showMap.js" defer></script>
+
+  <title>Сворення заходу | ToGetThere</title>
 </head>
 
 <body>
@@ -38,12 +41,12 @@
 
         <div class="form-name section">
           <label for="name" class="form-name_label">Назва заходу</label>
-          <input type="text" name="name" id="name" required placeholder="Футбол" value="Футбол">
+          <input type="text" name="name" id="name" required placeholder="Футбол">
         </div>
 
         <div class="form-type section">
           <label for="type" class="form-type_label">Вид спорту</label>
-          <select name="type" id="type" required>
+          <select aria-label="Type" name="type" id="type" required>
             <option value="" disabled selected hidden>Виберіть вид спорту</option>
             <%- selectType %>
           </select>
@@ -51,24 +54,24 @@
 
         <div class="form-city section">
           <label for="city" class="form-city_label">Місто</label>
-          <input value="НІКОПОЛЬ" name="city" list="cities" placeholder="Введіть місто" required id="city" />
+          <input name="city" list="cities" placeholder="Введіть місто" required id="city" style="text-transform:uppercase;" />
           <datalist id="cities" name="cities">
           </datalist>
         </div>
 
         <div class="form-date section">
           <label for="date" class="form-date_label">Дата</label>
-          <input type="date" name="date" id="date" min="2022-01-01" max="2026-12-31" value="2023-01-01" required>
+          <input type="date" name="date" id="date" min="2022-01-01" max="2026-12-31" placeholder="2023-01-01" required>
         </div>
 
         <div class="form-time section">
           <label for="time" class="form-time_label">Час</label>
-          <input type="time" name="time" id="time" placeholder="10:05" value="12:00" required>
+          <input type="time" name="time" id="time" placeholder="10:05" required>
         </div>
 
         <div class="form-level section">
           <label for="level" class="form-level_label">Рівень</label>
-          <select name="level" id="level" required>
+          <select aria-label="level" name="level" id="level" required>
             <option value="" disabled selected hidden>Виберіть рівень </option>
             <%- selectLevel %>
           </select>
@@ -83,11 +86,11 @@
       <div class="form-right">
         <div class="form-place section">
           <label for="place" class="form-place_label">Місце проведення</label>
-          <input type="text" name="place" id="place" value="Парк Перемоги">
+          <input type="text" name="place" id="place" placeholder="Парк Перемоги">
         </div>
         <div class="form-maxPart section">
           <label for="maxPart" class="form-maxPart_label">Максимальна кількість учасників</label>
-          <input type="number" name="maxPart" id="maxPart" value="15" min="1" max="20" step="1" required>
+          <input type="number" name="maxPart" id="maxPart" placeholder="15" min="1" max="50" step="1" required>
         </div>
         <div class="map-section">
           <input type="text" name="map" id="mapInput" style="display:none">
