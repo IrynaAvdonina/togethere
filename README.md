@@ -26,7 +26,7 @@ Developed with the software and tools below.
 
 
 
-![Logo](https://raw.githubusercontent.com/IrynaAvdonina/togethere/main/public/img/icon96.ico)
+                                                                 ![Logo](https://raw.githubusercontent.com/IrynaAvdonina/togethere/main/public/img/icon96.ico)
 
 ToGetThere is created to unite people who want to spend time in sports together. It provides an opportunity not only to find like-minded individuals but also to create your own events that others can attend. This is an ideal tool for those looking to make new social connections through sports activities.
 
